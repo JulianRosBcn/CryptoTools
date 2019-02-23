@@ -1,0 +1,11 @@
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.csprojResolveAssemblyReference.cache
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.csproj.CoreCompileInputs.cache
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\CryptoMiddleware.exe.config
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\CryptoMiddleware.exe
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\CryptoMiddleware.pdb
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.exe
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.pdb
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonsoft.Json.dll
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonsoft.Json.pdb
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonsoft.Json.xml
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.csproj.CopyComplete
