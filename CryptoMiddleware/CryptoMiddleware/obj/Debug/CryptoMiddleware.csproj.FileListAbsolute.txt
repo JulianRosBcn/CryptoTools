@@ -9,3 +9,7 @@ D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonso
 D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonsoft.Json.pdb
 D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Newtonsoft.Json.xml
 D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\obj\Debug\CryptoMiddleware.csproj.CopyComplete
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Google.Protobuf.dll
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\MySql.Data.dll
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\Google.Protobuf.xml
+D:\JULIANROSBCN\CryptoTools\CryptoMiddleware\CryptoMiddleware\bin\Debug\MySql.Data.xml

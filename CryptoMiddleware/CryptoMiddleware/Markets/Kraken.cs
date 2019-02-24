@@ -37,9 +37,9 @@ namespace CryptoMiddleware
 
                 JObject tmp = JObject.Parse(webresponse);
 
-                krakenInfo.ask = tmp["result"]["XXBTZEUR"]["a"][0].ToString();
-                krakenInfo.bid = tmp["result"]["XXBTZEUR"]["b"][0].ToString();
-                krakenInfo.last = tmp["result"]["XXBTZEUR"]["c"][0].ToString();
+                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["a"][0]);
+                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["b"][0]);
+                krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
 
                 Console.WriteLine(string.Format("Ask:{0}    | Bid:{1}    | Last:{2}  ", krakenInfo.ask, krakenInfo.bid, krakenInfo.last));
 
@@ -56,10 +56,10 @@ namespace CryptoMiddleware
 
     public class KrakenQuote
     {
-        public string ask { get; set; }
-        public string bid { get; set; }
-        public string last { get; set; }
-        public string volume { get; set; }
+        public double ask { get; set; }
+        public double bid { get; set; }
+        public double last { get; set; }
+        public DateTime timestamp { get; set; }
     }
 
 
