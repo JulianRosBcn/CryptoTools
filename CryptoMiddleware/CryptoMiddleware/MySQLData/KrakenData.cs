@@ -7,7 +7,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 
 
-namespace CryptoMiddleware
+namespace CryptoImporter
 {
     
     public class KrakenData

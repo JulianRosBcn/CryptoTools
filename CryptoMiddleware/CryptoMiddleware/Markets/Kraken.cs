@@ -9,9 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MySql.Data;
 
-
-
-namespace CryptoMiddleware
+namespace CryptoImporter
 {
     
 
