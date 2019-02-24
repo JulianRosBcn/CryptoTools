@@ -1,13 +1,15 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `InsertQuoteInfo`(
-_ask DOUBLE,
-_bid DOUBLE,
-_last DOUBLE,
-_volume DOUBLE,
-_volumeavgprice DOUBLE,
-_numoftrades DOUBLE,
-_timestamp DATETIME
+CREATE DEFINER=`root`@`%` PROCEDURE `SMACalculation`(
+
 )
+
 BEGIN
-	INSERT INTO quotes (`ask`,`bid`,`last`,`volume`,`volumeavgprice`,`numoftrades`,`timestamp`)
-    VALUES (_ask,_bid,_last,_volume,_volumeavgprice,_numoftrades,_timestamp);
+
+	SET time_zone='+01:00';
+	
+	INSERT INTO kraken.indicators (sma5min) SELECT AVG(last) FROM kraken.quotes WHERE timestamp < (NOW() - INTERVAL 5 minute);
+	INSERT INTO kraken.indicators (sma20min) SELECT AVG(last) FROM kraken.quotes WHERE timestamp < (NOW() - INTERVAL 20 minute);
+	INSERT INTO kraken.indicators (sma60min) SELECT AVG(last) FROM kraken.quotes WHERE timestamp < (NOW() - INTERVAL 60 minute);
+	INSERT INTO kraken.indicators (sma24h) SELECT AVG(last) FROM kraken.quotes WHERE timestamp < (NOW() - INTERVAL 24 hour);
+	INSERT INTO kraken.indicators (timestamp) VALUES (NOW());
+	
 END
