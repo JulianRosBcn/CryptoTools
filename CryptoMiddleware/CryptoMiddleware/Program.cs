@@ -11,10 +11,11 @@ namespace CryptoMiddleware
     {
         static void Main(string[] args)
         {
+            KrakenData.RemoveQuoteData();
             while (true)
             { 
                 KrakenFunctions.GetKrakenMarketData();
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
             }
         }
     }

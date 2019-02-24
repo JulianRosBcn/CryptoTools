@@ -41,7 +41,10 @@ namespace CryptoMiddleware
                 krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["b"][0]);
                 krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
 
-                Console.WriteLine(string.Format("Ask:{0}    | Bid:{1}    | Last:{2}  ", krakenInfo.ask, krakenInfo.bid, krakenInfo.last));
+                Console.WriteLine(string.Format("Ask:{0}    | Bid:{1}    | Last:{2}    | Timestamp:{3}  ", krakenInfo.ask, krakenInfo.bid, krakenInfo.last, DateTime.Now));
+
+                KrakenData.InsertQuoteData(krakenInfo.ask, krakenInfo.bid, krakenInfo.last, DateTime.Now);
+
 
             }
 

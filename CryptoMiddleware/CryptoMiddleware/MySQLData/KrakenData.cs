@@ -10,59 +10,41 @@ using MySql.Data.MySqlClient;
 namespace CryptoMiddleware
 {
     
-    class KrakenData
+    public class KrakenData
     {
 
-        string MySQLConnectionString = "Server=localhost; database={0}; UID=root; password=root";
+         public static string mysqlconnectionstring = "server=192.168.56.50;user=root;database=Kraken;port=3306;password=root;";
 
-        //public class DBConnection
-        //{
-        //    private DBConnection()
-        //    {
-        //    }
 
-        //    private string databaseName = string.Empty;
-        //    public string DatabaseName
-        //    {
-        //        get { return databaseName; }
-        //        set { databaseName = value; }
-        //    }
+            public static void InsertQuoteData(double ask, double bid, double last, DateTime timestamp)
+            {
 
-        //    public string Password { get; set; }
-        //    private MySqlConnection connection = null;
-        //    public MySqlConnection Connection
-        //    {
-        //        get { return connection; }
-        //    }
+                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+            {
+                    mysqlcon.Open();
+                    MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
+                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    mysqlcmd.Parameters.AddWithValue("_ask", ask);
+                    mysqlcmd.Parameters.AddWithValue("_bid", bid);
+                    mysqlcmd.Parameters.AddWithValue("_last", last);
+                    mysqlcmd.Parameters.AddWithValue("_timestamp", timestamp);
+                    mysqlcmd.ExecuteNonQuery();
+                }
 
-        //    private static DBConnection _instance = null;
-        //    public static DBConnection Instance()
-        //    {
-        //        if (_instance == null)
-        //            _instance = new DBConnection();
-        //        return _instance;
-        //    }
+            }
 
-        //    public bool IsConnect()
-        //    {
-        //        if (Connection == null)
-        //        {
-        //            if (String.IsNullOrEmpty(databaseName))
-        //                return false;
-        //            string connstring = string.Format(, databaseName);
-        //            connection = new MySqlConnection(connstring);
-        //            connection.Open();
-        //        }
+            public static void RemoveQuoteData()
+            {
 
-        //        return true;
-        //    }
+                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+                {
+                    mysqlcon.Open();
+                    MySqlCommand mysqlcmd = new MySqlCommand("deletequotestabledata", mysqlcon);
+                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    mysqlcmd.ExecuteNonQuery();
+                }
 
-        //    public void Close()
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
+            }
 
     }
 }

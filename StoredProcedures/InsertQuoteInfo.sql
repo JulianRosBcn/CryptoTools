@@ -5,6 +5,6 @@ _last DOUBLE,
 _timestamp DATETIME
 )
 BEGIN
-	INSERT INTO Quotes (`ask`,`bid`,`last`,`timestamp`)
-    VALUES (_ask,_bid_last,_timestamp);
+	INSERT INTO quotes (`ask`,`bid`,`last`,`timestamp`)
+    VALUES (_ask,_bid,_last,_timestamp);
 END
