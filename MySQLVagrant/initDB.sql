@@ -11,3 +11,11 @@ CREATE TABLE `quotes` (
   `numoftrades` DOUBLE NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `indicators` (
+  `sma5min` DOUBLE NOT NULL,
+  `sma20min` DOUBLE NOT NULL,
+  `sma60min` DOUBLE NOT NULL,
+  `sma24h` DOUBLE NOT NULL,
+  `timestamp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
