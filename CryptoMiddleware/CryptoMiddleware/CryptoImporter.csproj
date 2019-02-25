@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1CED2229-B6DB-46FA-97BE-452E7CFB359B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CryptoMiddleware</RootNamespace>
-    <AssemblyName>CryptoMiddleware</AssemblyName>
+    <RootNamespace>CryptoImporter</RootNamespace>
+    <AssemblyName>CryptoImporter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
