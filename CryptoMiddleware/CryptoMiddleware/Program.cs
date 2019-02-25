@@ -12,6 +12,7 @@ namespace CryptoImporter
         static void Main(string[] args)
         {
             KrakenData.RemoveQuoteData();
+            KrakenData.RemoveIndicatorsData();
             while (true)
             { 
                 KrakenFunctions.GetKrakenMarketData();

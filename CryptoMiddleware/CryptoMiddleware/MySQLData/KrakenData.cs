@@ -49,5 +49,19 @@ namespace CryptoImporter
 
             }
 
+            public static void RemoveIndicatorsData()
+            {
+
+                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+                {
+                    mysqlcon.Open();
+                    MySqlCommand mysqlcmd = new MySqlCommand("DeleteIndicatorsTableData", mysqlcon);
+                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    mysqlcmd.ExecuteNonQuery();
+                }
+
+            }
+
+
     }
 }
