@@ -1,0 +1,61 @@
+CREATE DEFINER=`root`@`%` PROCEDURE `SMATrending`(
+
+)
+
+BEGIN
+
+	-- Variables to store state of the alarm (sensitive 0.5%). 3 values supported: buy,sell and neutral
+	DECLARE _sma5min_trending VARCHAR(10);
+	DECLARE _sma20min_trending VARCHAR(10);
+	DECLARE _sma60min_trending VARCHAR(10);
+	DECLARE _sma24h_trending VARCHAR(10);
+	DECLARE _buysensor DOUBLE DEFAULT 1.005;
+	DECLARE _sellsensor DOUBLE DEFAULT 0.995 ;
+	
+	SET time_zone='+01:00';
+
+	SET @_lastquote := (SELECT last FROM kraken.quotes ORDER BY timestamp DESC LIMIT 1);
+	
+	SET @_lastsma5min := (SELECT sma5min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
+	SET @_lastsma20min := (SELECT sma20min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
+	SET @_lastsma60min := (SELECT sma60min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
+	SET @_lastsma24h := (SELECT sma24h FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
+	
+	-- sma5min
+	IF  (@_lastsma5min * _buysensor > @_lastquote) THEN SET _sma5min_trending = "buy";
+    END IF;
+	IF  (@_lastsma5min * _sellsensor < @_lastquote) THEN SET _sma5min_trending = "sell";
+	END IF;
+    IF  (@_lastsma5min * _sellsensor >= @_lastquote OR @_lastsma5min * _buysensor <= @_lastquote) THEN SET _sma5min_trending = "neutral";
+	END IF;
+	
+	-- sma20min
+	IF  (@_lastsma20min * _buysensor > @_lastquote) THEN SET _sma20min_trending = "buy";
+    END IF;
+	IF  (@_lastsma20min * _sellsensor < @_lastquote) THEN SET _sma20min_trending = "sell";
+	END IF;
+    IF  (@_lastsma20min * _sellsensor >= @_lastquote OR @_lastsma20min * _buysensor <= @_lastquote) THEN SET _sma20min_trending = "neutral";
+	END IF;
+	
+	-- sma60min
+	IF  (@_lastsma60min * _buysensor > @_lastquote) THEN SET _sma60min_trending = "buy";
+    END IF;
+	IF  (@_lastsma60min * _sellsensor < @_lastquote) THEN SET _sma60min_trending = "sell";
+	END IF;
+    IF  (@_lastsma60min * _sellsensor >= @_lastquote OR @_lastsma60min * _buysensor <= @_lastquote) THEN SET _sma60min_trending = "neutral";
+	END IF;
+	
+	-- sma24h
+	IF  (@_lastsma24h * _buysensor > @_lastquote) THEN SET _sma24h_trending = "buy";
+    END IF;
+	IF  (@_lastsma24h * _sellsensor < @_lastquote) THEN SET _sma24h_trending = "sell";
+	END IF;
+    IF  (@_lastsma24h * _sellsensor >= @_lastquote OR @_lastsma24h * _buysensor <= @_lastquote) THEN SET _sma24h_trending = "neutral";
+	END IF;
+    
+	-- SELECT @_lastsma5min, @_lastquote, _sma5min_trending;
+	
+	INSERT INTO kraken.alarms (`sma5min_trending`,`sma20min_trending`,`sma60min_trending`,`sma24h_trending`,`timestamp`)
+    VALUES (_sma5min_trending,_sma20min_trending,_sma60min_trending,_sma24h_trending,NOW());
+
+END 

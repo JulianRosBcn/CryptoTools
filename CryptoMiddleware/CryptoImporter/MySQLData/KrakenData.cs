@@ -62,6 +62,18 @@ namespace CryptoImporter
 
             }
 
+            public static void RemoveAlarmsData()
+            {
+
+                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+                {
+                    mysqlcon.Open();
+                    MySqlCommand mysqlcmd = new MySqlCommand("DeleteAlarmsTableData", mysqlcon);
+                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    mysqlcmd.ExecuteNonQuery();
+                }
+
+            }
 
     }
 }

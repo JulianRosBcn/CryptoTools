@@ -11,8 +11,12 @@ namespace CryptoImporter
     {
         static void Main(string[] args)
         {
+            //Delete all existing data in DBs
+
             KrakenData.RemoveQuoteData();
             KrakenData.RemoveIndicatorsData();
+            KrakenData.RemoveAlarmsData();
+
             while (true)
             { 
                 KrakenFunctions.GetKrakenMarketData();
