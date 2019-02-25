@@ -22,35 +22,35 @@ BEGIN
 	SET @_lastsma24h := (SELECT sma24h FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
 	
 	-- sma5min
-	IF  (@_lastsma5min * _buysensor > @_lastquote) THEN SET _sma5min_trending = "buy";
+	IF  (@_lastsma5min > @_lastquote * _buysensor) THEN SET _sma5min_trending = "buy";
     END IF;
-	IF  (@_lastsma5min * _sellsensor < @_lastquote) THEN SET _sma5min_trending = "sell";
+	IF  (@_lastsma5min < @_lastquote * _sellsensor) THEN SET _sma5min_trending = "sell";
 	END IF;
-    IF  (@_lastsma5min * _sellsensor >= @_lastquote OR @_lastsma5min * _buysensor <= @_lastquote) THEN SET _sma5min_trending = "neutral";
+    IF  (@_lastsma5min >= @_lastquote * _sellsensor OR @_lastsma5min <= @_lastquote * _buysensor) THEN SET _sma5min_trending = "neutral";
 	END IF;
 	
 	-- sma20min
-	IF  (@_lastsma20min * _buysensor > @_lastquote) THEN SET _sma20min_trending = "buy";
+	IF  (@_lastsma20min > @_lastquote * _buysensor) THEN SET _sma20min_trending = "buy";
     END IF;
-	IF  (@_lastsma20min * _sellsensor < @_lastquote) THEN SET _sma20min_trending = "sell";
+	IF  (@_lastsma20min < @_lastquote * _sellsensor) THEN SET _sma20min_trending = "sell";
 	END IF;
-    IF  (@_lastsma20min * _sellsensor >= @_lastquote OR @_lastsma20min * _buysensor <= @_lastquote) THEN SET _sma20min_trending = "neutral";
+    IF  (@_lastsma20min >= @_lastquote * _sellsensor OR @_lastsma20min <= @_lastquote * _buysensor) THEN SET _sma20min_trending = "neutral";
 	END IF;
 	
 	-- sma60min
-	IF  (@_lastsma60min * _buysensor > @_lastquote) THEN SET _sma60min_trending = "buy";
+	IF  (@_lastsma60min > @_lastquote * _buysensor) THEN SET _sma60min_trending = "buy";
     END IF;
-	IF  (@_lastsma60min * _sellsensor < @_lastquote) THEN SET _sma60min_trending = "sell";
+	IF  (@_lastsma60min < @_lastquote * _sellsensor) THEN SET _sma60min_trending = "sell";
 	END IF;
-    IF  (@_lastsma60min * _sellsensor >= @_lastquote OR @_lastsma60min * _buysensor <= @_lastquote) THEN SET _sma60min_trending = "neutral";
+    IF  (@_lastsma60min >= @_lastquote * _sellsensor OR @_lastsma60min <= @_lastquote * _buysensor) THEN SET _sma60min_trending = "neutral";
 	END IF;
 	
 	-- sma24h
-	IF  (@_lastsma24h * _buysensor > @_lastquote) THEN SET _sma24h_trending = "buy";
+	IF  (@_lastsma24h > @_lastquote * _buysensor) THEN SET _sma24h_trending = "buy";
     END IF;
-	IF  (@_lastsma24h * _sellsensor < @_lastquote) THEN SET _sma24h_trending = "sell";
+	IF  (@_lastsma24h < @_lastquote * _sellsensor) THEN SET _sma24h_trending = "sell";
 	END IF;
-    IF  (@_lastsma24h * _sellsensor >= @_lastquote OR @_lastsma24h * _buysensor <= @_lastquote) THEN SET _sma24h_trending = "neutral";
+    IF  (@_lastsma24h >= @_lastquote * _sellsensor OR @_lastsma24h <= @_lastquote * _buysensor) THEN SET _sma24h_trending = "neutral";
 	END IF;
     
 	-- SELECT @_lastsma5min, @_lastquote, _sma5min_trending;
