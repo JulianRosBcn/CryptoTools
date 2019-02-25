@@ -10,6 +10,7 @@ namespace CryptoIndicators
     {
         static void Main(string[] args)
         {
+                
         }
     }
 }
