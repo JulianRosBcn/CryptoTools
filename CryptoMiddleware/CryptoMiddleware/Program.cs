@@ -16,7 +16,7 @@ namespace CryptoImporter
             while (true)
             { 
                 KrakenFunctions.GetKrakenMarketData();
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
             }
         }
     }
