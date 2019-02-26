@@ -14,67 +14,66 @@ namespace CryptoImporter
     public class KrakenData
     {
 
-         //public static string mysqlconnectionstring = "server=192.168.56.50;user=root;database=kraken;port=3306;password=root;";
         public static string mysqlconnectionstring  =  ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
 
-        public static void InsertQuoteData(double ask, double bid, double last, double volume, double volumeavgprice, double numoftrades, DateTime timestamp)
-            {
+        public static void InsertQuoteData(double ask, double bid, double last, double volumetoday, double volumeavgprice, double numoftrades, DateTime timestamp)
+        {
 
-                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-            {
-                    mysqlcon.Open();
-                    MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
-                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    mysqlcmd.Parameters.AddWithValue("_ask", ask);
-                    mysqlcmd.Parameters.AddWithValue("_bid", bid);
-                    mysqlcmd.Parameters.AddWithValue("_last", last);
-                    mysqlcmd.Parameters.AddWithValue("_volume", volume);
-                    mysqlcmd.Parameters.AddWithValue("_volumeavgprice", volumeavgprice);
-                    mysqlcmd.Parameters.AddWithValue("_numoftrades", numoftrades);
-                    mysqlcmd.Parameters.AddWithValue("_timestamp", timestamp);
-                    mysqlcmd.ExecuteNonQuery();
-                }
-                   
+            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+        {
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
+                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_ask", ask);
+                mysqlcmd.Parameters.AddWithValue("_bid", bid);
+                mysqlcmd.Parameters.AddWithValue("_last", last);
+                mysqlcmd.Parameters.AddWithValue("_volumetoday", volumetoday);
+                mysqlcmd.Parameters.AddWithValue("_volumeavgprice", volumeavgprice);
+                mysqlcmd.Parameters.AddWithValue("_numoftrades", numoftrades);
+                mysqlcmd.Parameters.AddWithValue("_timestamp", timestamp);
+                mysqlcmd.ExecuteNonQuery();
             }
-            
-            public static void RemoveQuoteData()
+               
+        }
+        
+        public static void RemoveQuoteData()
+        {
+
+            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
-
-                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-                {
-                    mysqlcon.Open();
-                    MySqlCommand mysqlcmd = new MySqlCommand("DeleteQuotesTableData", mysqlcon);
-                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    mysqlcmd.ExecuteNonQuery();
-                }
-
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteQuotesTableData", mysqlcon);
+                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.ExecuteNonQuery();
             }
 
-            public static void RemoveIndicatorsData()
+        }
+
+        public static void RemoveIndicatorsData()
+        {
+
+            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
-
-                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-                {
-                    mysqlcon.Open();
-                    MySqlCommand mysqlcmd = new MySqlCommand("DeleteIndicatorsTableData", mysqlcon);
-                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    mysqlcmd.ExecuteNonQuery();
-                }
-
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteIndicatorsTableData", mysqlcon);
+                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.ExecuteNonQuery();
             }
 
-            public static void RemoveAlarmsData()
+        }
+
+        public static void RemoveAlarmsData()
+        {
+
+            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
-
-                using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-                {
-                    mysqlcon.Open();
-                    MySqlCommand mysqlcmd = new MySqlCommand("DeleteAlarmsTableData", mysqlcon);
-                    mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    mysqlcmd.ExecuteNonQuery();
-                }
-
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteAlarmsTableData", mysqlcon);
+                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.ExecuteNonQuery();
             }
+
+        }
 
     }
 }

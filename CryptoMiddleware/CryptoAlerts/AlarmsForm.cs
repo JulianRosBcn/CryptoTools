@@ -20,7 +20,6 @@ namespace CryptoAlerts
         public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100"; // used only for chart refresh, static value
 
 
-
         public AlarmsForm()
         {
             InitializeComponent();

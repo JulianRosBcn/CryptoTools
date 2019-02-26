@@ -38,14 +38,14 @@ namespace CryptoImporter
                 krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["a"][0]);
                 krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["b"][0]);
                 krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
-                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["v"][0]);
+                krakenInfo.volumetoday = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["v"][0]);
                 krakenInfo.volumeavgprice = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["p"][0]);
                 krakenInfo.numoftrades = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["t"][0]);
 
                 Console.WriteLine(string.Format("Ask:{0} | Bid:{1} | Last:{2} | Volume:{3} | VolumeAVGPrice:{4} | NumOfTrades:{5} | Timestamp:{6}",
-                        krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now));
+                        krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volumetoday, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now));
 
-                KrakenData.InsertQuoteData(krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now);
+                KrakenData.InsertQuoteData(krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volumetoday, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now);
 
             }
 
@@ -64,7 +64,7 @@ namespace CryptoImporter
         public double ask { get; set; }
         public double bid { get; set; }
         public double last { get; set; }
-        public double volume { get; set; }
+        public double volumetoday { get; set; }
         public double volumeavgprice { get; set; }
         public double numoftrades { get; set; }
         public DateTime timestamp { get; set; }
