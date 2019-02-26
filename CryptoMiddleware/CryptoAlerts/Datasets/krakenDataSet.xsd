@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="krakenDataSet" targetNamespace="http://tempuri.org/krakenDataSet.xsd" xmlns:mstns="http://tempuri.org/krakenDataSet.xsd" xmlns="http://tempuri.org/krakenDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="kraken" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="kraken (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.CryptoAlerts.Properties.Settings.GlobalReference.Default.kraken" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="alarmsTableAdapter" GeneratorDataComponentClassName="alarmsTableAdapter" Name="alarms" UserDataComponentName="alarmsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="kraken (Settings)" DbObjectName="kraken.alarms" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `sma5min_trending`, `sma20min_trending`, `sma60min_trending`, `sma24h_trending`, `timestamp` FROM `alarms`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="indicatorsTableAdapter" GeneratorDataComponentClassName="indicatorsTableAdapter" Name="indicators" UserDataComponentName="indicatorsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="kraken (Settings)" DbObjectName="kraken.indicators" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `sma5min`, `sma20min`, `sma60min`, `sma24h`, `timestamp` FROM `indicators`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="quotesTableAdapter" GeneratorDataComponentClassName="quotesTableAdapter" Name="quotes" UserDataComponentName="quotesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="kraken (Settings)" DbObjectName="kraken.quotes" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `ask`, `bid`, `last`, `volume`, `volumeavgprice`, `numoftrades`, `timestamp` FROM `quotes`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="krakenDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="krakenDataSet" msprop:Generator_UserDSName="krakenDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="alarms" msprop:Generator_TableClassName="alarmsDataTable" msprop:Generator_TableVarName="tablealarms" msprop:Generator_TablePropName="alarms" msprop:Generator_RowDeletingName="alarmsRowDeleting" msprop:Generator_RowChangingName="alarmsRowChanging" msprop:Generator_RowEvHandlerName="alarmsRowChangeEventHandler" msprop:Generator_RowDeletedName="alarmsRowDeleted" msprop:Generator_UserTableName="alarms" msprop:Generator_RowChangedName="alarmsRowChanged" msprop:Generator_RowEvArgName="alarmsRowChangeEvent" msprop:Generator_RowClassName="alarmsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="indicators" msprop:Generator_TableClassName="indicatorsDataTable" msprop:Generator_TableVarName="tableindicators" msprop:Generator_TablePropName="indicators" msprop:Generator_RowDeletingName="indicatorsRowDeleting" msprop:Generator_RowChangingName="indicatorsRowChanging" msprop:Generator_RowEvHandlerName="indicatorsRowChangeEventHandler" msprop:Generator_RowDeletedName="indicatorsRowDeleted" msprop:Generator_UserTableName="indicators" msprop:Generator_RowChangedName="indicatorsRowChanged" msprop:Generator_RowEvArgName="indicatorsRowChangeEvent" msprop:Generator_RowClassName="indicatorsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="quotes" msprop:Generator_TableClassName="quotesDataTable" msprop:Generator_TableVarName="tablequotes" msprop:Generator_TablePropName="quotes" msprop:Generator_RowDeletingName="quotesRowDeleting" msprop:Generator_RowChangingName="quotesRowChanging" msprop:Generator_RowEvHandlerName="quotesRowChangeEventHandler" msprop:Generator_RowDeletedName="quotesRowDeleted" msprop:Generator_UserTableName="quotes" msprop:Generator_RowChangedName="quotesRowChanged" msprop:Generator_RowEvArgName="quotesRowChangeEvent" msprop:Generator_RowClassName="quotesRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

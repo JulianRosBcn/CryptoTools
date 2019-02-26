@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ namespace CryptoImporter
     public class KrakenData
     {
 
-         public static string mysqlconnectionstring = "server=192.168.56.50;user=root;database=kraken;port=3306;password=root;";
+         //public static string mysqlconnectionstring = "server=192.168.56.50;user=root;database=kraken;port=3306;password=root;";
+        public static string mysqlconnectionstring  =  ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
 
-
-            public static void InsertQuoteData(double ask, double bid, double last, double volume, double volumeavgprice, double numoftrades, DateTime timestamp)
+        public static void InsertQuoteData(double ask, double bid, double last, double volume, double volumeavgprice, double numoftrades, DateTime timestamp)
             {
 
                 using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
