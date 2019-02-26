@@ -5,12 +5,12 @@ CREATE DEFINER=`root`@`%` PROCEDURE `SMATrending`(
 BEGIN
 
 	-- Variables to store state of the alarm (sensitive 0.5%). 3 values supported: buy,sell and neutral
-	DECLARE _sma5min_trending VARCHAR(10);
-	DECLARE _sma20min_trending VARCHAR(10);
-	DECLARE _sma60min_trending VARCHAR(10);
-	DECLARE _sma24h_trending VARCHAR(10);
-	DECLARE _buysensor DOUBLE DEFAULT 1.005;
-	DECLARE _sellsensor DOUBLE DEFAULT 0.995 ;
+	DECLARE _sma5min_trending VARCHAR(10) DEFAULT "neutral";
+	DECLARE _sma20min_trending VARCHAR(10) DEFAULT "neutral";
+	DECLARE _sma60min_trending VARCHAR(10) DEFAULT "neutral";
+	DECLARE _sma24h_trending VARCHAR(10) DEFAULT "neutral";
+	DECLARE _buysensor DOUBLE DEFAULT 1.0001;
+	DECLARE _sellsensor DOUBLE DEFAULT 0.9999 ;
 	
 	SET time_zone='+01:00';
 
@@ -26,15 +26,11 @@ BEGIN
     END IF;
 	IF  (@_lastsma5min < @_lastquote * _sellsensor) THEN SET _sma5min_trending = "sell";
 	END IF;
-    IF  (@_lastsma5min >= @_lastquote * _sellsensor OR @_lastsma5min <= @_lastquote * _buysensor) THEN SET _sma5min_trending = "neutral";
-	END IF;
 	
 	-- sma20min
 	IF  (@_lastsma20min > @_lastquote * _buysensor) THEN SET _sma20min_trending = "buy";
     END IF;
 	IF  (@_lastsma20min < @_lastquote * _sellsensor) THEN SET _sma20min_trending = "sell";
-	END IF;
-    IF  (@_lastsma20min >= @_lastquote * _sellsensor OR @_lastsma20min <= @_lastquote * _buysensor) THEN SET _sma20min_trending = "neutral";
 	END IF;
 	
 	-- sma60min
@@ -42,16 +38,13 @@ BEGIN
     END IF;
 	IF  (@_lastsma60min < @_lastquote * _sellsensor) THEN SET _sma60min_trending = "sell";
 	END IF;
-    IF  (@_lastsma60min >= @_lastquote * _sellsensor OR @_lastsma60min <= @_lastquote * _buysensor) THEN SET _sma60min_trending = "neutral";
-	END IF;
 	
 	-- sma24h
 	IF  (@_lastsma24h > @_lastquote * _buysensor) THEN SET _sma24h_trending = "buy";
     END IF;
 	IF  (@_lastsma24h < @_lastquote * _sellsensor) THEN SET _sma24h_trending = "sell";
 	END IF;
-    IF  (@_lastsma24h >= @_lastquote * _sellsensor OR @_lastsma24h <= @_lastquote * _buysensor) THEN SET _sma24h_trending = "neutral";
-	END IF;
+
     
 	-- SELECT @_lastsma5min, @_lastquote, _sma5min_trending;
 	
