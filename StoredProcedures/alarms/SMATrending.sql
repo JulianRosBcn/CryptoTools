@@ -44,11 +44,11 @@ BEGIN
     END IF;
 	IF  (@_lastsma24h < @_lastquote * _sellsensor) THEN SET _sma24h_trending = "buy";
 	END IF;
-
+	
     
 	-- SELECT @_lastsma5min, @_lastquote, _sma5min_trending;
 	
 	INSERT INTO kraken.alarms (`sma5min_trending`,`sma20min_trending`,`sma60min_trending`,`sma24h_trending`,`timestamp`)
     VALUES (_sma5min_trending,_sma20min_trending,_sma60min_trending,_sma24h_trending,NOW());
-
+	
 END 

@@ -16,7 +16,7 @@ namespace CryptoImporter
 
         public static string mysqlconnectionstring  =  ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
 
-        public static void InsertQuoteData(double ask, double bid, double last, double volumetoday, double volumeavgprice, double numoftrades, DateTime timestamp)
+        public static void InsertQuoteData(double ask, double bid, double last, double volume, double volumetoday, double volumeavgprice, double numoftrades, DateTime timestamp)
         {
 
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
@@ -27,6 +27,7 @@ namespace CryptoImporter
                 mysqlcmd.Parameters.AddWithValue("_ask", ask);
                 mysqlcmd.Parameters.AddWithValue("_bid", bid);
                 mysqlcmd.Parameters.AddWithValue("_last", last);
+                mysqlcmd.Parameters.AddWithValue("_volume", volume);
                 mysqlcmd.Parameters.AddWithValue("_volumetoday", volumetoday);
                 mysqlcmd.Parameters.AddWithValue("_volumeavgprice", volumeavgprice);
                 mysqlcmd.Parameters.AddWithValue("_numoftrades", numoftrades);
