@@ -33,7 +33,7 @@ namespace CryptoImporter
                     mysqlcmd.Parameters.AddWithValue("_timestamp", timestamp);
                     mysqlcmd.ExecuteNonQuery();
                 }
-
+                   
             }
             
             public static void RemoveQuoteData()
