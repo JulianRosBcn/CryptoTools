@@ -35,7 +35,7 @@ namespace CryptoImporter
                 }
 
             }
-
+            
             public static void RemoveQuoteData()
             {
 

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAlerts", "CryptoAlerts\CryptoAlerts.csproj", "{168DA389-B638-4296-BC60-A10A9037FF20}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoImporter", "CryptoImporter\CryptoImporter.csproj", "{1CED2229-B6DB-46FA-97BE-452E7CFB359B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAlerts", "CryptoAlerts\CryptoAlerts.csproj", "{85ED4A7D-C1DF-4340-813D-9451876F0A4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{168DA389-B638-4296-BC60-A10A9037FF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{168DA389-B638-4296-BC60-A10A9037FF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{168DA389-B638-4296-BC60-A10A9037FF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{168DA389-B638-4296-BC60-A10A9037FF20}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CED2229-B6DB-46FA-97BE-452E7CFB359B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CED2229-B6DB-46FA-97BE-452E7CFB359B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CED2229-B6DB-46FA-97BE-452E7CFB359B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CED2229-B6DB-46FA-97BE-452E7CFB359B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85ED4A7D-C1DF-4340-813D-9451876F0A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85ED4A7D-C1DF-4340-813D-9451876F0A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85ED4A7D-C1DF-4340-813D-9451876F0A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85ED4A7D-C1DF-4340-813D-9451876F0A4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
