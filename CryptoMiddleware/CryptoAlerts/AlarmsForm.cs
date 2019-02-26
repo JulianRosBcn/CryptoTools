@@ -17,6 +17,7 @@ namespace CryptoAlerts
     {
 
         public static string query;
+        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100"; // used only for chart refresh, static value
 
 
 
@@ -58,6 +59,9 @@ namespace CryptoAlerts
         private void AlarmsForm_Load(object sender, EventArgs e)
         {
             optQuotes.Checked = true;
+
+            timer.Interval = 5000;
+            timer.Start();
         }
 
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
@@ -85,7 +89,7 @@ namespace CryptoAlerts
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(querychart, conn))
                 {
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -96,15 +100,16 @@ namespace CryptoAlerts
                     this.chart1.ChartAreas[0].AxisY.Name = "BTC Price in Euros";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
 
-                    System.Windows.Forms.Application.DoEvents();
+                    //System.Windows.Forms.Application.DoEvents();
 
 
                 }
             }
-            
-
         }
 
-
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            UpdateChart();
+        }
     }
 }

@@ -42,6 +42,7 @@
             this.optAlarms = new System.Windows.Forms.RadioButton();
             this.optIndicators = new System.Windows.Forms.RadioButton();
             this.optQuotes = new System.Windows.Forms.RadioButton();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).BeginInit();
@@ -156,6 +157,11 @@
             this.optQuotes.UseVisualStyleBackColor = true;
             this.optQuotes.CheckedChanged += new System.EventHandler(this.optQuotes_CheckedChanged);
             // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +198,7 @@
         private System.Windows.Forms.RadioButton optAlarms;
         private System.Windows.Forms.RadioButton optIndicators;
         private System.Windows.Forms.RadioButton optQuotes;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
