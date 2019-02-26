@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using MySql.Data.MySqlClient;
 
 namespace CryptoAlerts
@@ -15,8 +16,8 @@ namespace CryptoAlerts
     public partial class AlarmsForm : Form
     {
 
-        public static string selectetDB;
         public static string query;
+
 
 
         public AlarmsForm()
@@ -34,7 +35,7 @@ namespace CryptoAlerts
             //pending implementation
         }
 
-        private void DataLoad()
+        private void DataGridLoad()
         {
 
             string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
@@ -62,19 +63,48 @@ namespace CryptoAlerts
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT 100;";
-            DataLoad();
+            DataGridLoad();
         }
 
         private void optAlarms_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT 100;";
-            DataLoad();
+            DataGridLoad();
         }
 
         private void optQuotes_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100";
-            DataLoad();
+            DataGridLoad();
+            UpdateChart();
         }
+
+        private void UpdateChart()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                {
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    this.chart1.DataSource = dt;
+                    this.chart1.Series[0].XValueMember = "timestamp";
+                    this.chart1.Series[0].YValueMembers = "last";
+                    this.chart1.ChartAreas[0].AxisX.Name = "Query Timestamp";
+                    this.chart1.ChartAreas[0].AxisY.Name = "BTC Price in Euros";
+                    this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
+
+                    System.Windows.Forms.Application.DoEvents();
+
+
+                }
+            }
+            
+
+        }
+
+
     }
 }
