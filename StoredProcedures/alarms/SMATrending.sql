@@ -9,8 +9,8 @@ BEGIN
 	DECLARE _sma20min_trending VARCHAR(10) DEFAULT "neutral";
 	DECLARE _sma60min_trending VARCHAR(10) DEFAULT "neutral";
 	DECLARE _sma24h_trending VARCHAR(10) DEFAULT "neutral";
-	DECLARE _buysensor DOUBLE DEFAULT 1.0001;
-	DECLARE _sellsensor DOUBLE DEFAULT 0.9999 ;
+	DECLARE _buysensor DOUBLE DEFAULT 1.003;
+	DECLARE _sellsensor DOUBLE DEFAULT 0.997 ;
 	
 	SET time_zone='+01:00';
 
@@ -22,27 +22,27 @@ BEGIN
 	SET @_lastsma24h := (SELECT sma24h FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
 	
 	-- sma5min
-	IF  (@_lastsma5min > @_lastquote * _buysensor) THEN SET _sma5min_trending = "buy";
+	IF  (@_lastsma5min > @_lastquote * _buysensor) THEN SET _sma5min_trending = "sell";
     END IF;
-	IF  (@_lastsma5min < @_lastquote * _sellsensor) THEN SET _sma5min_trending = "sell";
+	IF  (@_lastsma5min < @_lastquote * _sellsensor) THEN SET _sma5min_trending = "buy";
 	END IF;
 	
 	-- sma20min
-	IF  (@_lastsma20min > @_lastquote * _buysensor) THEN SET _sma20min_trending = "buy";
+	IF  (@_lastsma20min > @_lastquote * _buysensor) THEN SET _sma20min_trending = "sell";
     END IF;
-	IF  (@_lastsma20min < @_lastquote * _sellsensor) THEN SET _sma20min_trending = "sell";
+	IF  (@_lastsma20min < @_lastquote * _sellsensor) THEN SET _sma20min_trending = "buy";
 	END IF;
 	
 	-- sma60min
-	IF  (@_lastsma60min > @_lastquote * _buysensor) THEN SET _sma60min_trending = "buy";
+	IF  (@_lastsma60min > @_lastquote * _buysensor) THEN SET _sma60min_trending = "sell";
     END IF;
-	IF  (@_lastsma60min < @_lastquote * _sellsensor) THEN SET _sma60min_trending = "sell";
+	IF  (@_lastsma60min < @_lastquote * _sellsensor) THEN SET _sma60min_trending = "buy";
 	END IF;
 	
 	-- sma24h
-	IF  (@_lastsma24h > @_lastquote * _buysensor) THEN SET _sma24h_trending = "buy";
+	IF  (@_lastsma24h > @_lastquote * _buysensor) THEN SET _sma24h_trending = "sell";
     END IF;
-	IF  (@_lastsma24h < @_lastquote * _sellsensor) THEN SET _sma24h_trending = "sell";
+	IF  (@_lastsma24h < @_lastquote * _sellsensor) THEN SET _sma24h_trending = "buy";
 	END IF;
 
     
