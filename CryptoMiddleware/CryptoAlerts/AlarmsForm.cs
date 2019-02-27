@@ -48,6 +48,10 @@ namespace CryptoAlerts
                     adapter.Fill(ds);
                     dataGridView1.AutoGenerateColumns = true;
                     dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    foreach (DataGridViewColumn col in dataGridView1.Columns)
+                    {
+                        col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
                     dataGridView1.DataSource = ds.Tables[0];
                     dataGridView1.Refresh();
                 }
@@ -97,9 +101,7 @@ namespace CryptoAlerts
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(querychart, conn))
                 {
                     DataTable dt = new DataTable();
-                    DataTable dt2 = new DataTable();
                     adapter.Fill(dt);
-                    adapter.Fill(dt2);
 
                     //chart1
                     this.chart1.DataSource = dt;
@@ -112,7 +114,7 @@ namespace CryptoAlerts
                     this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
 
                     //chart2
-                    this.chart2.DataSource = dt2;
+                    this.chart2.DataSource = dt;
                     this.chart2.Series[0].XValueMember = "timestamp";
                     this.chart2.Series[0].YValueMembers = "volume";
                     this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.000 BTC";

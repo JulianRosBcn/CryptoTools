@@ -68,14 +68,14 @@
             series1.Name = "BTC EUR Quote";
             series1.YValuesPerPoint = 4;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(743, 214);
+            this.chart1.Size = new System.Drawing.Size(870, 214);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // cmdExport
             // 
             this.cmdExport.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExport.Location = new System.Drawing.Point(377, 599);
+            this.cmdExport.Location = new System.Drawing.Point(464, 599);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(116, 42);
             this.cmdExport.TabIndex = 1;
@@ -86,7 +86,7 @@
             // cmdExit
             // 
             this.cmdExit.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExit.Location = new System.Drawing.Point(255, 599);
+            this.cmdExit.Location = new System.Drawing.Point(342, 599);
             this.cmdExit.Name = "cmdExit";
             this.cmdExit.Size = new System.Drawing.Size(116, 42);
             this.cmdExit.TabIndex = 2;
@@ -101,7 +101,7 @@
             this.dataGridView1.DataSource = this.krakenDataSetBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 423);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(743, 170);
+            this.dataGridView1.Size = new System.Drawing.Size(870, 170);
             this.dataGridView1.TabIndex = 3;
             // 
             // krakenDataSetBindingSource
@@ -122,7 +122,7 @@
             this.groupBox1.Controls.Add(this.optQuotes);
             this.groupBox1.Location = new System.Drawing.Point(14, 372);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(743, 45);
+            this.groupBox1.Size = new System.Drawing.Size(870, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select DB (showing only last 100 records)";
@@ -191,7 +191,7 @@
             series2.MarkerColor = System.Drawing.Color.White;
             series2.Name = "volume";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(744, 133);
+            this.chart2.Size = new System.Drawing.Size(871, 133);
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
@@ -199,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 648);
+            this.ClientSize = new System.Drawing.Size(896, 648);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
