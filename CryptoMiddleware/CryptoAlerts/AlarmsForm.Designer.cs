@@ -43,6 +43,7 @@
             this.optIndicators = new System.Windows.Forms.RadioButton();
             this.optQuotes = new System.Windows.Forms.RadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.optOrders = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).BeginInit();
@@ -114,6 +115,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.optOrders);
             this.groupBox1.Controls.Add(this.optAlarms);
             this.groupBox1.Controls.Add(this.optIndicators);
             this.groupBox1.Controls.Add(this.optQuotes);
@@ -127,7 +129,7 @@
             // optAlarms
             // 
             this.optAlarms.AutoSize = true;
-            this.optAlarms.Location = new System.Drawing.Point(500, 21);
+            this.optAlarms.Location = new System.Drawing.Point(347, 21);
             this.optAlarms.Name = "optAlarms";
             this.optAlarms.Size = new System.Drawing.Size(56, 17);
             this.optAlarms.TabIndex = 2;
@@ -138,11 +140,11 @@
             // optIndicators
             // 
             this.optIndicators.AutoSize = true;
-            this.optIndicators.Location = new System.Drawing.Point(237, 21);
+            this.optIndicators.Location = new System.Drawing.Point(183, 21);
             this.optIndicators.Name = "optIndicators";
-            this.optIndicators.Size = new System.Drawing.Size(103, 17);
+            this.optIndicators.Size = new System.Drawing.Size(71, 17);
             this.optIndicators.TabIndex = 1;
-            this.optIndicators.Text = "Indicators (SMA)";
+            this.optIndicators.Text = "Indicators";
             this.optIndicators.UseVisualStyleBackColor = true;
             this.optIndicators.CheckedChanged += new System.EventHandler(this.optIndicators_CheckedChanged);
             // 
@@ -161,6 +163,17 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // optOrders
+            // 
+            this.optOrders.AutoSize = true;
+            this.optOrders.Location = new System.Drawing.Point(499, 21);
+            this.optOrders.Name = "optOrders";
+            this.optOrders.Size = new System.Drawing.Size(56, 17);
+            this.optOrders.TabIndex = 3;
+            this.optOrders.Text = "Orders";
+            this.optOrders.UseVisualStyleBackColor = true;
+            this.optOrders.CheckedChanged += new System.EventHandler(this.optOrders_CheckedChanged);
             // 
             // AlarmsForm
             // 
@@ -199,6 +212,7 @@
         private System.Windows.Forms.RadioButton optIndicators;
         private System.Windows.Forms.RadioButton optQuotes;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.RadioButton optOrders;
     }
 }
 

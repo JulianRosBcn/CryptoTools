@@ -82,6 +82,12 @@ namespace CryptoAlerts
             UpdateChart();
         }
 
+        private void optOrders_CheckedChanged(object sender, EventArgs e)
+        {
+            query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT 100";
+            DataGridLoad();
+        }
+
         private void UpdateChart()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
@@ -99,9 +105,8 @@ namespace CryptoAlerts
                     this.chart1.ChartAreas[0].AxisY.Name = "BTC Price in Euros";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+                    this.chart1.ChartAreas[0].AxisX.IsStartedFromZero = true;
                     //System.Windows.Forms.Application.DoEvents();
-
-
                 }
             }
         }

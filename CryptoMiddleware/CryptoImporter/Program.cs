@@ -16,6 +16,7 @@ namespace CryptoImporter
             KrakenData.RemoveQuoteData();
             KrakenData.RemoveIndicatorsData();
             KrakenData.RemoveAlarmsData();
+            KrakenData.RemoveOrdersData();
 
             while (true)
             { 

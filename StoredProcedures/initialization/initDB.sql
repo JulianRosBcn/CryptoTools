@@ -31,3 +31,9 @@ CREATE TABLE `alarms` (
   `volumeflow_trending` VARCHAR(20), -- Volume5min_trending is updated with a SP so it will be null at first and updated later
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `alarms` (
+  `order` VARCHAR(20) NOT NULL,
+  `type` VARCHAR(20) NOT NULL,
+  `timestamp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

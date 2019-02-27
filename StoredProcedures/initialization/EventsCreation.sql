@@ -12,6 +12,12 @@ BEGIN
 	CALL VolumeFlowTrending();
 END
 
+CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
+BEGIN
+	CALL OrderManager();
+END
+
+
 CREATE EVENT Event_Indicators
     ON SCHEDULE EVERY 1 MINUTE
     DO 
@@ -21,3 +27,8 @@ CREATE EVENT Event_Alarms
     ON SCHEDULE EVERY 1 MINUTE
     DO 
 		CALL UpdateAlarms();
+		
+CREATE EVENT Event_Orders
+    ON SCHEDULE EVERY 1 MINUTE
+    DO 
+		CALL UpdateOrders();

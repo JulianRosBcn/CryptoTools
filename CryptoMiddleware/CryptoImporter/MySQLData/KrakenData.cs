@@ -76,5 +76,18 @@ namespace CryptoImporter
 
         }
 
+        public static void RemoveOrdersData()
+        {
+
+            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+            {
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteOrdersTableData", mysqlcon);
+                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.ExecuteNonQuery();
+            }
+
+        }
+
     }
 }
