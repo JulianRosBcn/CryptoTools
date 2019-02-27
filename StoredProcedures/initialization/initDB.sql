@@ -32,7 +32,7 @@ CREATE TABLE `alarms` (
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `alarms` (
+CREATE TABLE `orders` (
   `order` VARCHAR(20) NOT NULL,
   `type` VARCHAR(20) NOT NULL,
   `timestamp` datetime NOT NULL
