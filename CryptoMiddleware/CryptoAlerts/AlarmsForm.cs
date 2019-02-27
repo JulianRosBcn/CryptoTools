@@ -79,7 +79,7 @@ namespace CryptoAlerts
         {
             query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100";
             DataGridLoad();
-            UpdateChart();
+            UpdateCharts();
         }
 
         private void optOrders_CheckedChanged(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace CryptoAlerts
             DataGridLoad();
         }
 
-        private void UpdateChart()
+        private void UpdateCharts()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
 
@@ -97,22 +97,39 @@ namespace CryptoAlerts
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(querychart, conn))
                 {
                     DataTable dt = new DataTable();
+                    DataTable dt2 = new DataTable();
                     adapter.Fill(dt);
+                    adapter.Fill(dt2);
+
+                    //chart1
                     this.chart1.DataSource = dt;
                     this.chart1.Series[0].XValueMember = "timestamp";
                     this.chart1.Series[0].YValueMembers = "last";
-                    this.chart1.ChartAreas[0].AxisX.Name = "Query Timestamp";
-                    this.chart1.ChartAreas[0].AxisY.Name = "BTC Price in Euros";
+                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} €";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
-                    //System.Windows.Forms.Application.DoEvents();
+                    this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                    this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+
+                    //chart2
+                    this.chart2.DataSource = dt2;
+                    this.chart2.Series[0].XValueMember = "timestamp";
+                    this.chart2.Series[0].YValueMembers = "volume";
+                    this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.000 BTC";
+                    this.chart2.ChartAreas[0].AxisY.IsStartedFromZero = true;
+                    this.chart2.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+                    this.chart2.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                    this.chart2.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+
+                    System.Windows.Forms.Application.DoEvents();
                 }
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            UpdateChart();
+            UpdateCharts();
         }
+
     }
 }

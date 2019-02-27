@@ -30,8 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmdExport = new System.Windows.Forms.Button();
             this.cmdExit = new System.Windows.Forms.Button();
@@ -39,16 +40,18 @@
             this.krakenDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.krakenDataSet = new CryptoAlerts.Datasets.krakenDataSet();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.optOrders = new System.Windows.Forms.RadioButton();
             this.optAlarms = new System.Windows.Forms.RadioButton();
             this.optIndicators = new System.Windows.Forms.RadioButton();
             this.optQuotes = new System.Windows.Forms.RadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.optOrders = new System.Windows.Forms.RadioButton();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSet)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -56,27 +59,25 @@
             chartArea1.BorderWidth = 2;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(13, 12);
             this.chart1.Name = "chart1";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.IsVisibleInLegend = false;
             series1.Name = "BTC EUR Quote";
             series1.YValuesPerPoint = 4;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(743, 188);
+            this.chart1.Size = new System.Drawing.Size(743, 214);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // cmdExport
             // 
             this.cmdExport.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExport.Location = new System.Drawing.Point(641, 213);
+            this.cmdExport.Location = new System.Drawing.Point(377, 599);
             this.cmdExport.Name = "cmdExport";
-            this.cmdExport.Size = new System.Drawing.Size(116, 97);
+            this.cmdExport.Size = new System.Drawing.Size(116, 42);
             this.cmdExport.TabIndex = 1;
             this.cmdExport.Text = "EXPORT";
             this.cmdExport.UseVisualStyleBackColor = true;
@@ -85,9 +86,9 @@
             // cmdExit
             // 
             this.cmdExit.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExit.Location = new System.Drawing.Point(641, 345);
+            this.cmdExit.Location = new System.Drawing.Point(255, 599);
             this.cmdExit.Name = "cmdExit";
-            this.cmdExit.Size = new System.Drawing.Size(116, 97);
+            this.cmdExit.Size = new System.Drawing.Size(116, 42);
             this.cmdExit.TabIndex = 2;
             this.cmdExit.Text = "EXIT";
             this.cmdExit.UseVisualStyleBackColor = true;
@@ -98,9 +99,9 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.DataSource = this.krakenDataSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 266);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 423);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(607, 176);
+            this.dataGridView1.Size = new System.Drawing.Size(743, 170);
             this.dataGridView1.TabIndex = 3;
             // 
             // krakenDataSetBindingSource
@@ -119,17 +120,28 @@
             this.groupBox1.Controls.Add(this.optAlarms);
             this.groupBox1.Controls.Add(this.optIndicators);
             this.groupBox1.Controls.Add(this.optQuotes);
-            this.groupBox1.Location = new System.Drawing.Point(13, 207);
+            this.groupBox1.Location = new System.Drawing.Point(14, 372);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 53);
+            this.groupBox1.Size = new System.Drawing.Size(743, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select DB (showing only last 100 records)";
             // 
+            // optOrders
+            // 
+            this.optOrders.AutoSize = true;
+            this.optOrders.Location = new System.Drawing.Point(604, 19);
+            this.optOrders.Name = "optOrders";
+            this.optOrders.Size = new System.Drawing.Size(56, 17);
+            this.optOrders.TabIndex = 3;
+            this.optOrders.Text = "Orders";
+            this.optOrders.UseVisualStyleBackColor = true;
+            this.optOrders.CheckedChanged += new System.EventHandler(this.optOrders_CheckedChanged);
+            // 
             // optAlarms
             // 
             this.optAlarms.AutoSize = true;
-            this.optAlarms.Location = new System.Drawing.Point(347, 21);
+            this.optAlarms.Location = new System.Drawing.Point(423, 19);
             this.optAlarms.Name = "optAlarms";
             this.optAlarms.Size = new System.Drawing.Size(56, 17);
             this.optAlarms.TabIndex = 2;
@@ -140,7 +152,7 @@
             // optIndicators
             // 
             this.optIndicators.AutoSize = true;
-            this.optIndicators.Location = new System.Drawing.Point(183, 21);
+            this.optIndicators.Location = new System.Drawing.Point(241, 19);
             this.optIndicators.Name = "optIndicators";
             this.optIndicators.Size = new System.Drawing.Size(71, 17);
             this.optIndicators.TabIndex = 1;
@@ -151,7 +163,7 @@
             // optQuotes
             // 
             this.optQuotes.AutoSize = true;
-            this.optQuotes.Location = new System.Drawing.Point(33, 21);
+            this.optQuotes.Location = new System.Drawing.Point(59, 19);
             this.optQuotes.Name = "optQuotes";
             this.optQuotes.Size = new System.Drawing.Size(59, 17);
             this.optQuotes.TabIndex = 0;
@@ -164,22 +176,31 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // optOrders
+            // chart2
             // 
-            this.optOrders.AutoSize = true;
-            this.optOrders.Location = new System.Drawing.Point(499, 21);
-            this.optOrders.Name = "optOrders";
-            this.optOrders.Size = new System.Drawing.Size(56, 17);
-            this.optOrders.TabIndex = 3;
-            this.optOrders.Text = "Orders";
-            this.optOrders.UseVisualStyleBackColor = true;
-            this.optOrders.CheckedChanged += new System.EventHandler(this.optOrders_CheckedChanged);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            this.chart2.Location = new System.Drawing.Point(13, 233);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series2.IsVisibleInLegend = false;
+            series2.LabelBackColor = System.Drawing.Color.White;
+            series2.LabelBorderColor = System.Drawing.Color.White;
+            series2.MarkerColor = System.Drawing.Color.White;
+            series2.Name = "volume";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(744, 133);
+            this.chart2.TabIndex = 5;
+            this.chart2.Text = "chart2";
             // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 456);
+            this.ClientSize = new System.Drawing.Size(769, 648);
+            this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cmdExit);
@@ -195,6 +216,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -213,6 +235,7 @@
         private System.Windows.Forms.RadioButton optQuotes;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.RadioButton optOrders;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 
