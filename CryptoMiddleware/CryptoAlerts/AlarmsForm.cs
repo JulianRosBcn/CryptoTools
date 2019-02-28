@@ -46,13 +46,13 @@ namespace CryptoAlerts
                 {
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
+                    DataTable dt = new DataTable();
+                    dt = ds.Tables[0];
+                    dataGridView1.Columns.Clear(); //required to maintain timestamp as last column in the datatable
+                    dt.Columns["timestamp"].SetOrdinal(dt.Columns.Count - 1);
                     dataGridView1.AutoGenerateColumns = true;
                     dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-                    foreach (DataGridViewColumn col in dataGridView1.Columns)
-                    {
-                        col.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    }
-                    dataGridView1.DataSource = ds.Tables[0];
+                    dataGridView1.DataSource = dt;
                     dataGridView1.Refresh();
                 }
             }
@@ -70,26 +70,25 @@ namespace CryptoAlerts
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT 100;";
-            DataGridLoad();
+            if (optIndicators.Checked == true) { DataGridLoad(); }
         }
 
         private void optAlarms_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT 100;";
-            DataGridLoad();
+            if (optAlarms.Checked == true) { DataGridLoad(); }
         }
 
         private void optQuotes_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100";
-            DataGridLoad();
-            UpdateCharts();
+            if (optQuotes.Checked == true) { DataGridLoad(); }
         }
 
         private void optOrders_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT 100";
-            DataGridLoad();
+            if (optOrders.Checked == true) { DataGridLoad(); }
         }
 
         private void UpdateCharts()
