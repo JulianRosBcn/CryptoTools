@@ -75,7 +75,7 @@
             // cmdExport
             // 
             this.cmdExport.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExport.Location = new System.Drawing.Point(464, 599);
+            this.cmdExport.Location = new System.Drawing.Point(326, 599);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(116, 42);
             this.cmdExport.TabIndex = 1;
@@ -86,7 +86,7 @@
             // cmdExit
             // 
             this.cmdExit.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExit.Location = new System.Drawing.Point(342, 599);
+            this.cmdExit.Location = new System.Drawing.Point(458, 599);
             this.cmdExit.Name = "cmdExit";
             this.cmdExit.Size = new System.Drawing.Size(116, 42);
             this.cmdExit.TabIndex = 2;

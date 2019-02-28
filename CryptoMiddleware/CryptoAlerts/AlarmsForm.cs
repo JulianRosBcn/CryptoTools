@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,33 @@ namespace CryptoAlerts
 
         private void cmdExport_Click(object sender, EventArgs e)
         {
-            //pending implementation
+
+            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    DataTable dt = new DataTable();
+                    dt = ds.Tables[0];
+                    StringBuilder sb = new StringBuilder();
+
+                    IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
+                                                      Select(column => column.ColumnName);
+                    sb.AppendLine(string.Join(",", columnNames));
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                        sb.AppendLine(string.Join(",", fields));
+                    }
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    File.WriteAllText("OrderBook"+timestamp+".csv", sb.ToString());
+                    MessageBox.Show("OrderBook has been exported to " + AppDomain.CurrentDomain.BaseDirectory + @"OrderBook" + timestamp + ".csv");
+                }
+            }
         }
 
         private void DataGridLoad()
@@ -61,6 +88,7 @@ namespace CryptoAlerts
 
         private void AlarmsForm_Load(object sender, EventArgs e)
         {
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             optQuotes.Checked = true;
 
             timer.Interval = 5000;
