@@ -56,6 +56,7 @@
             // 
             // chart1
             // 
+            chartArea1.AxisX.MaximumAutoSize = 99F;
             chartArea1.BorderWidth = 2;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
@@ -66,7 +67,6 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.IsVisibleInLegend = false;
             series1.Name = "BTC EUR Quote";
-            series1.YValuesPerPoint = 4;
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(870, 214);
             this.chart1.TabIndex = 0;

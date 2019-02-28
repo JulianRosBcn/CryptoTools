@@ -18,7 +18,7 @@ namespace CryptoAlerts
     {
 
         public static string query;
-        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100"; // used only for chart refresh, static value
+        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 18000"; // used only for chart refresh, static value
 
 
         public AlarmsForm()
@@ -55,9 +55,9 @@ namespace CryptoAlerts
                         IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
                         sb.AppendLine(string.Join(",", fields));
                     }
-                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                    File.WriteAllText("OrderBook"+timestamp+".csv", sb.ToString());
-                    MessageBox.Show("OrderBook has been exported to " + AppDomain.CurrentDomain.BaseDirectory + @"OrderBook" + timestamp + ".csv");
+                    string timeformat = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    File.WriteAllText("OrderBook"+ timeformat + ".csv", sb.ToString());
+                    MessageBox.Show("OrderBook has been exported to " + AppDomain.CurrentDomain.BaseDirectory + @"OrderBook" + timeformat + ".csv");
                 }
             }
         }
@@ -137,6 +137,7 @@ namespace CryptoAlerts
                     this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.0} €";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+                    this.chart1.Series[0].XValueType = ChartValueType.DateTime;
                     this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
                     this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
 
@@ -147,6 +148,7 @@ namespace CryptoAlerts
                     this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.000 BTC";
                     this.chart2.ChartAreas[0].AxisY.IsStartedFromZero = true;
                     this.chart2.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+                    this.chart2.Series[0].XValueType = ChartValueType.DateTime;
                     this.chart2.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
                     this.chart2.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
 
