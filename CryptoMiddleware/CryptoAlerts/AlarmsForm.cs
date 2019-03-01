@@ -18,7 +18,7 @@ namespace CryptoAlerts
     {
 
         public static string query;
-        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 18000"; // used only for chart refresh, static value
+        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT ";// used only for chart refresh, static value
 
 
         public AlarmsForm()
@@ -97,25 +97,25 @@ namespace CryptoAlerts
 
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT 100;";
+            query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
             if (optIndicators.Checked == true) { DataGridLoad(); }
         }
 
         private void optAlarms_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT 100;";
+            query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
             if (optAlarms.Checked == true) { DataGridLoad(); }
         }
 
         private void optQuotes_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT 100";
+            query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
             if (optQuotes.Checked == true) { DataGridLoad(); }
         }
 
         private void optOrders_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT 100";
+            query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
             if (optOrders.Checked == true) { DataGridLoad(); }
         }
 
@@ -125,7 +125,7 @@ namespace CryptoAlerts
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(querychart, conn))
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(querychart + txtNumOfRecords.Text, conn))
                 {
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -134,7 +134,7 @@ namespace CryptoAlerts
                     this.chart1.DataSource = dt;
                     this.chart1.Series[0].XValueMember = "timestamp";
                     this.chart1.Series[0].YValueMembers = "last";
-                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.0} €";
+                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} €";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
                     this.chart1.Series[0].XValueType = ChartValueType.DateTime;
@@ -145,7 +145,7 @@ namespace CryptoAlerts
                     this.chart2.DataSource = dt;
                     this.chart2.Series[0].XValueMember = "timestamp";
                     this.chart2.Series[0].YValueMembers = "volume";
-                    this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.000 BTC";
+                    this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.0 Btc";
                     this.chart2.ChartAreas[0].AxisY.IsStartedFromZero = true;
                     this.chart2.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
                     this.chart2.Series[0].XValueType = ChartValueType.DateTime;
@@ -162,5 +162,9 @@ namespace CryptoAlerts
             UpdateCharts();
         }
 
+        private void txtNumOfRecords_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

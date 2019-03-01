@@ -46,6 +46,8 @@
             this.optQuotes = new System.Windows.Forms.RadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNumOfRecords = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).BeginInit();
@@ -56,9 +58,15 @@
             // 
             // chart1
             // 
+            this.chart1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.AxisX.MaximumAutoSize = 99F;
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.BorderWidth = 2;
             chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 94F;
+            chartArea1.Position.Width = 94F;
+            chartArea1.Position.Y = 3F;
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(13, 12);
             this.chart1.Name = "chart1";
@@ -74,7 +82,7 @@
             // 
             // cmdExport
             // 
-            this.cmdExport.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdExport.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdExport.Location = new System.Drawing.Point(326, 599);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(116, 42);
@@ -85,10 +93,10 @@
             // 
             // cmdExit
             // 
-            this.cmdExit.Font = new System.Drawing.Font("Franklin Gothic Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdExit.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdExit.Location = new System.Drawing.Point(458, 599);
             this.cmdExit.Name = "cmdExit";
-            this.cmdExit.Size = new System.Drawing.Size(116, 42);
+            this.cmdExit.Size = new System.Drawing.Size(128, 42);
             this.cmdExit.TabIndex = 2;
             this.cmdExit.Text = "EXIT";
             this.cmdExit.UseVisualStyleBackColor = true;
@@ -116,6 +124,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtNumOfRecords);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.optOrders);
             this.groupBox1.Controls.Add(this.optAlarms);
             this.groupBox1.Controls.Add(this.optIndicators);
@@ -125,12 +135,12 @@
             this.groupBox1.Size = new System.Drawing.Size(870, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select DB (showing only last 100 records)";
+            this.groupBox1.Text = "Select Data";
             // 
             // optOrders
             // 
             this.optOrders.AutoSize = true;
-            this.optOrders.Location = new System.Drawing.Point(604, 19);
+            this.optOrders.Location = new System.Drawing.Point(534, 19);
             this.optOrders.Name = "optOrders";
             this.optOrders.Size = new System.Drawing.Size(56, 17);
             this.optOrders.TabIndex = 3;
@@ -141,7 +151,7 @@
             // optAlarms
             // 
             this.optAlarms.AutoSize = true;
-            this.optAlarms.Location = new System.Drawing.Point(423, 19);
+            this.optAlarms.Location = new System.Drawing.Point(372, 19);
             this.optAlarms.Name = "optAlarms";
             this.optAlarms.Size = new System.Drawing.Size(56, 17);
             this.optAlarms.TabIndex = 2;
@@ -152,7 +162,7 @@
             // optIndicators
             // 
             this.optIndicators.AutoSize = true;
-            this.optIndicators.Location = new System.Drawing.Point(241, 19);
+            this.optIndicators.Location = new System.Drawing.Point(210, 19);
             this.optIndicators.Name = "optIndicators";
             this.optIndicators.Size = new System.Drawing.Size(71, 17);
             this.optIndicators.TabIndex = 1;
@@ -178,7 +188,13 @@
             // 
             // chart2
             // 
+            this.chart2.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.BackColor = System.Drawing.Color.Transparent;
             chartArea2.Name = "ChartArea1";
+            chartArea2.Position.Auto = false;
+            chartArea2.Position.Height = 94F;
+            chartArea2.Position.Width = 94F;
+            chartArea2.Position.Y = 3F;
             this.chart2.ChartAreas.Add(chartArea2);
             this.chart2.Location = new System.Drawing.Point(13, 233);
             this.chart2.Name = "chart2";
@@ -195,10 +211,29 @@
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(674, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Number of records";
+            // 
+            // txtNumOfRecords
+            // 
+            this.txtNumOfRecords.Location = new System.Drawing.Point(774, 14);
+            this.txtNumOfRecords.Name = "txtNumOfRecords";
+            this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
+            this.txtNumOfRecords.TabIndex = 5;
+            this.txtNumOfRecords.Text = "100";
+            this.txtNumOfRecords.TextChanged += new System.EventHandler(this.txtNumOfRecords_TextChanged);
+            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(896, 648);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox1);
@@ -236,6 +271,8 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.RadioButton optOrders;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.TextBox txtNumOfRecords;
+        private System.Windows.Forms.Label label1;
     }
 }
 
