@@ -7,9 +7,6 @@ CREATE TABLE `quotes` (
   `bid` DOUBLE NOT NULL,
   `last` DOUBLE NOT NULL,
   `volume` DOUBLE NOT NULL,
-  `volumetoday` DOUBLE NOT NULL,
-  `volumeavgprice` DOUBLE NOT NULL,
-  `numoftrades` DOUBLE NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
