@@ -31,17 +31,17 @@ namespace CryptoImporter.Markets
             {
 
                 // GETTING QUOTES
-                string webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=XBTEUR");
+                string webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=XBTUSD");
                 
                 JObject tmp = JObject.Parse(webresponse);
 
-                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["a"][0]);
-                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["b"][0]);
-                krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
-                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][1]);
+                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["a"][0]);
+                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["b"][0]);
+                krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["c"][0]);
+                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["c"][1]);
 
                 Console.WriteLine(string.Format("KRAKEN: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now));
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
 
                 MySQLData.MarketData.InsertQuoteData("kraken",krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
 

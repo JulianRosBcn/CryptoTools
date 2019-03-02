@@ -38,7 +38,6 @@
   <ItemGroup>
     <Compile Include="Markets\Kraken.cs" />
     <Compile Include="Markets\Binance.cs" />
-    <Compile Include="Markets\Poloniex.cs" />
     <Compile Include="Markets\QuoteInfo.cs" />
     <Compile Include="MySQLData\MarketData.cs" />
     <Compile Include="Program.cs" />

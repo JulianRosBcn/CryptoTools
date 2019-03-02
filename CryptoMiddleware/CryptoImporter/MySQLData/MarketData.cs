@@ -22,8 +22,9 @@ namespace CryptoImporter.MySQLData
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand(market + ".InsertQuoteInfo", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_market", market);
                 mysqlcmd.Parameters.AddWithValue("_ask", ask);
                 mysqlcmd.Parameters.AddWithValue("_bid", bid);
                 mysqlcmd.Parameters.AddWithValue("_last", last);
@@ -40,7 +41,7 @@ namespace CryptoImporter.MySQLData
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand(market + ".DeleteQuotesTableData", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteQuotesTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
                 mysqlcmd.ExecuteNonQuery();
             }
@@ -53,7 +54,7 @@ namespace CryptoImporter.MySQLData
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand(market + ".DeleteIndicatorsTableData", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteIndicatorsTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
                 mysqlcmd.ExecuteNonQuery();
             }
@@ -66,7 +67,7 @@ namespace CryptoImporter.MySQLData
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand(market + ".DeleteAlarmsTableData", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteAlarmsTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
                 mysqlcmd.ExecuteNonQuery();
             }
@@ -79,7 +80,7 @@ namespace CryptoImporter.MySQLData
             using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand(market + ".DeleteOrdersTableData", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteOrdersTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
                 mysqlcmd.ExecuteNonQuery();
             }

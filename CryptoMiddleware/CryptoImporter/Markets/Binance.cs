@@ -38,12 +38,12 @@ namespace CryptoImporter.Markets
                 BinanceInfo.ask = Convert.ToDouble(tmp[11]["askPrice"]);
                 BinanceInfo.bid = Convert.ToDouble(tmp[11]["bidPrice"]);
                 BinanceInfo.last = Convert.ToDouble(tmp[11]["lastPrice"]);
-                BinanceInfo.volume = Convert.ToDouble(tmp[11]["volume"]);
+                BinanceInfo.volume = Convert.ToDouble(tmp[11]["lastQty"]);
 
                 Console.WriteLine(string.Format("Binance: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
                         BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now));
 
-                MySQLData.MarketData.InsertQuoteData("Binance",BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData("binance", BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now);
 
             }
 
