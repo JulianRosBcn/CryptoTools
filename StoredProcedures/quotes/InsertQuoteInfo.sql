@@ -1,5 +1,6 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `InsertQuoteInfo`(
 _market VARCHAR(20),
+_coinpair VARCHAR(20),
 _ask DOUBLE,
 _bid DOUBLE,
 _last DOUBLE,
@@ -22,8 +23,8 @@ BEGIN
 
 	-- SET @_volume = (_volumetoday - @lastvolume);
 	
-	IF (_market = 'kraken') THEN INSERT INTO markets.kraken_quotes (`ask`,`bid`,`last`, `volume`,`timestamp`) VALUES (_ask,_bid,_last,_volume,_timestamp);
+	IF (_market = 'kraken') THEN INSERT INTO markets.kraken_quotes (`coinpair`,`ask`,`bid`,`last`, `volume`,`timestamp`) VALUES (_coinpair,_ask,_bid,_last,_volume,_timestamp);
 	END IF;
-    IF (_market = 'binance') THEN INSERT INTO markets.binance_quotes (`ask`,`bid`,`last`, `volume`,`timestamp`) VALUES (_ask,_bid,_last,_volume,_timestamp);
+    IF (_market = 'binance') THEN INSERT INTO markets.binance_quotes (`coinpair`,`ask`,`bid`,`last`, `volume`,`timestamp`) VALUES (_coinpair,_ask,_bid,_last,_volume,_timestamp);
 	END IF;
 END

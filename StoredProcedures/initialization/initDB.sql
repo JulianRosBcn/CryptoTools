@@ -3,6 +3,7 @@ CREATE SCHEMA `markets`;
 USE markets;
 
 CREATE TABLE `kraken_quotes` (
+  `coinpair` VARCHAR(20) NOT NULL,  	
   `ask` DOUBLE NOT NULL,
   `bid` DOUBLE NOT NULL,
   `last` DOUBLE NOT NULL,
@@ -11,6 +12,7 @@ CREATE TABLE `kraken_quotes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binance_quotes` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `ask` DOUBLE NOT NULL,
   `bid` DOUBLE NOT NULL,
   `last` DOUBLE NOT NULL,

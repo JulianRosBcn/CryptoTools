@@ -7,8 +7,8 @@ BEGIN
 	DECLARE _order VARCHAR(10);
 	DECLARE _type VARCHAR(10);
 	DECLARE _lastorder VARCHAR(10);
-	DECLARE _krakenstate VARCHAR(10) DEFAULT "neutral"; -- OPERATE / NEUTRAL 
-	DECLARE _binancestate VARCHAR(10) DEFAULT "neutral"; -- OPERATE / NEUTRAL 
+	DECLARE _krakenstate VARCHAR(10) DEFAULT "neutral"; -- BUY / SELL / NEUTRAL 
+	DECLARE _binancestate VARCHAR(10) DEFAULT "neutral"; -- BUY / SELL / NEUTRAL
 	
 	SET time_zone='+01:00';
 	
@@ -101,5 +101,6 @@ BEGIN
 		INSERT INTO orders (`order`,`type`,`timestamp`)
 		VALUES (_order,_type,NOW());
 	END IF;
+	
 	
 END

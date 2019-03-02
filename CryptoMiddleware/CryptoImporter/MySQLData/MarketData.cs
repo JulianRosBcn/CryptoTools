@@ -19,7 +19,7 @@ namespace CryptoImporter.MySQLData
         public static string OrderBookConnectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString;
 
 
-        public static void InsertQuoteData(string market, double ask, double bid, double last, double volume, DateTime timestamp)
+        public static void InsertQuoteData(string market, string coinpair, double ask, double bid, double last, double volume, DateTime timestamp)
         {
 
             using (MySqlConnection mysqlcon = new MySqlConnection(MarketsConnectionString))
@@ -28,6 +28,7 @@ namespace CryptoImporter.MySQLData
                 MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
                 mysqlcmd.Parameters.AddWithValue("_market", market);
+                mysqlcmd.Parameters.AddWithValue("_coinpair", coinpair);
                 mysqlcmd.Parameters.AddWithValue("_ask", ask);
                 mysqlcmd.Parameters.AddWithValue("_bid", bid);
                 mysqlcmd.Parameters.AddWithValue("_last", last);
