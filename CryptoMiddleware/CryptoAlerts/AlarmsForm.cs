@@ -134,7 +134,7 @@ namespace CryptoAlerts
                     this.chart1.DataSource = dt;
                     this.chart1.Series[0].XValueMember = "timestamp";
                     this.chart1.Series[0].YValueMembers = "last";
-                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} €";
+                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} $";
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
                     this.chart1.Series[0].XValueType = ChartValueType.DateTime;

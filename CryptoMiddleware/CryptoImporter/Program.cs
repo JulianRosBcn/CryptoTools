@@ -13,14 +13,16 @@ namespace CryptoImporter
         {
             //Delete all existing data in DBs
 
-            KrakenData.RemoveQuoteData();
-            KrakenData.RemoveIndicatorsData();
-            KrakenData.RemoveAlarmsData();
-            KrakenData.RemoveOrdersData();
+            MySQLData.MarketData.RemoveQuoteData("kraken");
+            MySQLData.MarketData.RemoveQuoteData("binance");
+            MySQLData.MarketData.RemoveAnalyticsData("kraken");
+            MySQLData.MarketData.RemoveAnalyticsData("binance");
+            MySQLData.MarketData.RemoveOrdersData();
 
             while (true)
             { 
-                KrakenFunctions.GetKrakenMarketData();
+                Markets.Kraken.GetMarketData();
+                Markets.Binance.GetMarketData();
                 Thread.Sleep(3000);
             }
         }
