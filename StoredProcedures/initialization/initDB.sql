@@ -24,7 +24,7 @@ CREATE SCHEMA `analytics`;
 
 USE analytics;
 
-CREATE TABLE `kraken.indicators` (
+CREATE TABLE `kraken_indicators` (
   `sma5min` DOUBLE NOT NULL,
   `sma20min` DOUBLE NOT NULL,
   `sma60min` DOUBLE NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `kraken.indicators` (
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `kraken.alarms` (
+CREATE TABLE `kraken_alarms` (
   `sma5min_trending` VARCHAR(20) NOT NULL,
   `sma20min_trending` VARCHAR(20) NOT NULL,
   `sma60min_trending` VARCHAR(20) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `kraken.alarms` (
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `binance.indicators` (
+CREATE TABLE `binance_indicators` (
   `sma5min` DOUBLE NOT NULL,
   `sma20min` DOUBLE NOT NULL,
   `sma60min` DOUBLE NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `binance.indicators` (
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `binance.alarms` (
+CREATE TABLE `binance_alarms` (
   `sma5min_trending` VARCHAR(20) NOT NULL,
   `sma20min_trending` VARCHAR(20) NOT NULL,
   `sma60min_trending` VARCHAR(20) NOT NULL,
