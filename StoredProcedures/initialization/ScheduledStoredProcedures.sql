@@ -14,3 +14,4 @@ CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
 BEGIN
 	CALL OrderManager();
 END
+
