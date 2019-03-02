@@ -27,6 +27,7 @@ CREATE SCHEMA `analytics`;
 USE analytics;
 
 CREATE TABLE `kraken_indicators` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `sma5min` DOUBLE NOT NULL,
   `sma20min` DOUBLE NOT NULL,
   `sma60min` DOUBLE NOT NULL,
@@ -37,6 +38,7 @@ CREATE TABLE `kraken_indicators` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `kraken_alarms` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `sma5min_trending` VARCHAR(20) NOT NULL,
   `sma20min_trending` VARCHAR(20) NOT NULL,
   `sma60min_trending` VARCHAR(20) NOT NULL,
@@ -46,6 +48,7 @@ CREATE TABLE `kraken_alarms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binance_indicators` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `sma5min` DOUBLE NOT NULL,
   `sma20min` DOUBLE NOT NULL,
   `sma60min` DOUBLE NOT NULL,
@@ -56,6 +59,7 @@ CREATE TABLE `binance_indicators` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binance_alarms` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `sma5min_trending` VARCHAR(20) NOT NULL,
   `sma20min_trending` VARCHAR(20) NOT NULL,
   `sma60min_trending` VARCHAR(20) NOT NULL,
@@ -72,6 +76,7 @@ CREATE SCHEMA `orderbook`;
 USE orderbook;
 
 CREATE TABLE `orders` (
+  `coinpair` VARCHAR(20) NOT NULL, 
   `order` VARCHAR(20) NOT NULL,
   `type` VARCHAR(20) NOT NULL,
   `timestamp` datetime NOT NULL
