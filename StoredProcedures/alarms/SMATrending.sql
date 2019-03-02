@@ -1,5 +1,5 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `SMATrending`(
-
+_market VARCHAR(20)
 )
 
 BEGIN
@@ -14,12 +14,32 @@ BEGIN
 	
 	SET time_zone='+01:00';
 
-	SET @_lastquote := (SELECT last FROM kraken.quotes ORDER BY timestamp DESC LIMIT 1);
+	SET @query = CONCAT('SELECT last FROM markets.',_market,'_quotes ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastquote := @query_output;
 	
-	SET @_lastsma5min := (SELECT sma5min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
-	SET @_lastsma20min := (SELECT sma20min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
-	SET @_lastsma60min := (SELECT sma60min FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
-	SET @_lastsma24h := (SELECT sma24h FROM kraken.indicators ORDER BY timestamp DESC LIMIT 1);
+	
+	SET @query = CONCAT('SELECT sma5min FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastsma5min := @query_output;
+	
+	SET @query = CONCAT('SELECT sma20min FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastsma20min := @query_output;
+	
+	SET @query = CONCAT('SELECT sma60min FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastsma60min := @query_output;
+	
+	SET @query = CONCAT('SELECT sma24h FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastsma24h := @query_output;
+
 	
 	-- sma5min
 	IF  (@_lastsma5min > @_lastquote * _buysensor) THEN SET _sma5min_trending = "sell";
@@ -46,9 +66,17 @@ BEGIN
 	END IF;
 	
     
-	-- SELECT @_lastsma5min, @_lastquote, _sma5min_trending;
+	-- SELECT MARKET TO INSERT DATA
 	
-	INSERT INTO kraken.alarms (`sma5min_trending`,`sma20min_trending`,`sma60min_trending`,`sma24h_trending`,`timestamp`)
-    VALUES (_sma5min_trending,_sma20min_trending,_sma60min_trending,_sma24h_trending,NOW());
+	IF (_market = 'kraken') THEN
+		INSERT INTO analytics.kraken_alarms (`sma5min_trending`,`sma20min_trending`,`sma60min_trending`,`sma24h_trending`,`timestamp`)
+		VALUES (_sma5min_trending,_sma20min_trending,_sma60min_trending,_sma24h_trending,NOW());
+	END IF;
+	
+	IF (_market = 'binance') THEN
+		INSERT INTO analytics.binance_alarms (`sma5min_trending`,`sma20min_trending`,`sma60min_trending`,`sma24h_trending`,`timestamp`)
+		VALUES (_sma5min_trending,_sma20min_trending,_sma60min_trending,_sma24h_trending,NOW());
+	END IF;
+	
 	
 END 
