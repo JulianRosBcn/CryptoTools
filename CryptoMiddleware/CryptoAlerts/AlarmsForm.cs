@@ -16,9 +16,9 @@ namespace CryptoAlerts
 {
     public partial class AlarmsForm : Form
     {
-
+        public static string market;
         public static string query;
-        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT ";// used only for chart refresh, static value
+        public static string querychart;
 
 
         public AlarmsForm()
@@ -34,7 +34,7 @@ namespace CryptoAlerts
         private void cmdExport_Click(object sender, EventArgs e)
         {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -62,10 +62,15 @@ namespace CryptoAlerts
             }
         }
 
-        private void DataGridLoad()
+        private void DataGridLoad(string opt)
         {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+
+            if (opt == "quotes") { connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString; }
+            if (opt == "indicators") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
+            if (opt == "alarms") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
+            if (opt == "orders") { connectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString; }
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -89,39 +94,47 @@ namespace CryptoAlerts
         private void AlarmsForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            market = "kraken"; //review by radiobutton initialization does not generate handler
             optQuotes.Checked = true;
-
-            timer.Interval = 5000;
+            optKraken.Checked = true;
+            
+            timer.Interval = 2000;
             timer.Start();
         }
 
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
-            if (optIndicators.Checked == true) { DataGridLoad(); }
+            queryBuilder(market, "indicators");
+            if (optIndicators.Checked == true) { DataGridLoad("indicators"); }
         }
 
         private void optAlarms_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
-            if (optAlarms.Checked == true) { DataGridLoad(); }
+            queryBuilder(market, "alarms");
+            if (optAlarms.Checked == true) { DataGridLoad("alarms"); }
         }
 
         private void optQuotes_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
-            if (optQuotes.Checked == true) { DataGridLoad(); }
+            queryBuilder(market,"quotes");
+            if (optQuotes.Checked == true) { DataGridLoad("quotes"); }
         }
 
         private void optOrders_CheckedChanged(object sender, EventArgs e)
         {
             query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
-            if (optOrders.Checked == true) { DataGridLoad(); }
+            if (optOrders.Checked == true) { DataGridLoad("orders"); }
+        }
+
+        private void queryBuilder(string market, string table)
+        {
+            query = "SELECT * FROM `" + market + "_"+ table + "` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
         }
 
         private void UpdateCharts()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+            querychart = "SELECT * FROM `" + market + "_quotes` ORDER BY timestamp DESC LIMIT ";
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -162,9 +175,14 @@ namespace CryptoAlerts
             UpdateCharts();
         }
 
-        private void txtNumOfRecords_TextChanged(object sender, EventArgs e)
+        private void optBinance_CheckedChanged(object sender, EventArgs e)
         {
+            market = "binance";
+        }
 
+        private void optKraken_CheckedChanged(object sender, EventArgs e)
+        {
+            market = "kraken";
         }
     }
 }

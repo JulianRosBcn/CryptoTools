@@ -48,12 +48,16 @@
             this.optQuotes = new System.Windows.Forms.RadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.optBinance = new System.Windows.Forms.RadioButton();
+            this.optKraken = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KrakenSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KrakenSet)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
@@ -130,26 +134,25 @@
             this.groupBox1.Controls.Add(this.optAlarms);
             this.groupBox1.Controls.Add(this.optIndicators);
             this.groupBox1.Controls.Add(this.optQuotes);
-            this.groupBox1.Location = new System.Drawing.Point(14, 372);
+            this.groupBox1.Location = new System.Drawing.Point(277, 372);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(870, 45);
+            this.groupBox1.Size = new System.Drawing.Size(607, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Data";
             // 
             // txtNumOfRecords
             // 
-            this.txtNumOfRecords.Location = new System.Drawing.Point(774, 14);
+            this.txtNumOfRecords.Location = new System.Drawing.Point(538, 16);
             this.txtNumOfRecords.Name = "txtNumOfRecords";
             this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
             this.txtNumOfRecords.TabIndex = 5;
             this.txtNumOfRecords.Text = "100";
-            this.txtNumOfRecords.TextChanged += new System.EventHandler(this.txtNumOfRecords_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(674, 21);
+            this.label1.Location = new System.Drawing.Point(426, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 4;
@@ -158,7 +161,7 @@
             // optOrders
             // 
             this.optOrders.AutoSize = true;
-            this.optOrders.Location = new System.Drawing.Point(534, 19);
+            this.optOrders.Location = new System.Drawing.Point(327, 19);
             this.optOrders.Name = "optOrders";
             this.optOrders.Size = new System.Drawing.Size(56, 17);
             this.optOrders.TabIndex = 3;
@@ -169,7 +172,7 @@
             // optAlarms
             // 
             this.optAlarms.AutoSize = true;
-            this.optAlarms.Location = new System.Drawing.Point(372, 19);
+            this.optAlarms.Location = new System.Drawing.Point(226, 19);
             this.optAlarms.Name = "optAlarms";
             this.optAlarms.Size = new System.Drawing.Size(56, 17);
             this.optAlarms.TabIndex = 2;
@@ -180,7 +183,7 @@
             // optIndicators
             // 
             this.optIndicators.AutoSize = true;
-            this.optIndicators.Location = new System.Drawing.Point(210, 19);
+            this.optIndicators.Location = new System.Drawing.Point(113, 19);
             this.optIndicators.Name = "optIndicators";
             this.optIndicators.Size = new System.Drawing.Size(71, 17);
             this.optIndicators.TabIndex = 1;
@@ -191,7 +194,7 @@
             // optQuotes
             // 
             this.optQuotes.AutoSize = true;
-            this.optQuotes.Location = new System.Drawing.Point(59, 19);
+            this.optQuotes.Location = new System.Drawing.Point(9, 19);
             this.optQuotes.Name = "optQuotes";
             this.optQuotes.Size = new System.Drawing.Size(59, 17);
             this.optQuotes.TabIndex = 0;
@@ -229,12 +232,46 @@
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.optBinance);
+            this.groupBox2.Controls.Add(this.optKraken);
+            this.groupBox2.Location = new System.Drawing.Point(14, 372);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(257, 45);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Select Exchange";
+            // 
+            // optBinance
+            // 
+            this.optBinance.AutoSize = true;
+            this.optBinance.Location = new System.Drawing.Point(137, 19);
+            this.optBinance.Name = "optBinance";
+            this.optBinance.Size = new System.Drawing.Size(64, 17);
+            this.optBinance.TabIndex = 1;
+            this.optBinance.Text = "Binance";
+            this.optBinance.UseVisualStyleBackColor = true;
+            this.optBinance.CheckedChanged += new System.EventHandler(this.optBinance_CheckedChanged);
+            // 
+            // optKraken
+            // 
+            this.optKraken.AutoSize = true;
+            this.optKraken.Location = new System.Drawing.Point(33, 19);
+            this.optKraken.Name = "optKraken";
+            this.optKraken.Size = new System.Drawing.Size(59, 17);
+            this.optKraken.TabIndex = 0;
+            this.optKraken.Text = "Kraken";
+            this.optKraken.UseVisualStyleBackColor = true;
+            this.optKraken.CheckedChanged += new System.EventHandler(this.optKraken_CheckedChanged);
+            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(896, 648);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -252,6 +289,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -273,6 +312,9 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.TextBox txtNumOfRecords;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton optBinance;
+        private System.Windows.Forms.RadioButton optKraken;
     }
 }
 
