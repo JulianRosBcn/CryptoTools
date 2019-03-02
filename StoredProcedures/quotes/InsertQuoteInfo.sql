@@ -3,9 +3,6 @@ _ask DOUBLE,
 _bid DOUBLE,
 _last DOUBLE,
 _volume DOUBLE,
-_volumetoday DOUBLE,
-_volumeavgprice DOUBLE,
-_numoftrades DOUBLE,
 _timestamp DATETIME
 )
 BEGIN
@@ -21,8 +18,8 @@ BEGIN
 
 	
 
-	INSERT INTO quotes (`ask`,`bid`,`last`, `volume`, `volumetoday`,`volumeavgprice`,`numoftrades`,`timestamp`)
-    VALUES (_ask,_bid,_last,_volume,_volumetoday,_volumeavgprice,_numoftrades,_timestamp);
+	INSERT INTO quotes (`ask`,`bid`,`last`, `volume`,`timestamp`)
+    VALUES (_ask,_bid,_last,_volume,_timestamp);
 
 	
 	

@@ -37,21 +37,21 @@
             this.cmdExport = new System.Windows.Forms.Button();
             this.cmdExit = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.krakenDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.krakenDataSet = new CryptoAlerts.Datasets.krakenDataSet();
+            this.KrakenSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.KrakenSet = new CryptoAlerts.Datasets.KrakenSet();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtNumOfRecords = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.optOrders = new System.Windows.Forms.RadioButton();
             this.optAlarms = new System.Windows.Forms.RadioButton();
             this.optIndicators = new System.Windows.Forms.RadioButton();
             this.optQuotes = new System.Windows.Forms.RadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtNumOfRecords = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.krakenDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KrakenSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KrakenSet)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +74,7 @@
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.IsVisibleInLegend = false;
-            series1.Name = "BTC EUR Quote";
+            series1.Name = "BTC USD Quote";
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(870, 214);
             this.chart1.TabIndex = 0;
@@ -106,21 +106,21 @@
             // 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataSource = this.krakenDataSetBindingSource;
+            this.dataGridView1.DataSource = this.KrakenSetBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 423);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(870, 170);
             this.dataGridView1.TabIndex = 3;
             // 
-            // krakenDataSetBindingSource
+            // KrakenSetBindingSource
             // 
-            this.krakenDataSetBindingSource.DataSource = this.krakenDataSet;
-            this.krakenDataSetBindingSource.Position = 0;
+            this.KrakenSetBindingSource.DataSource = this.KrakenSet;
+            this.KrakenSetBindingSource.Position = 0;
             // 
-            // krakenDataSet
+            // KrakenSet
             // 
-            this.krakenDataSet.DataSetName = "krakenDataSet";
-            this.krakenDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.KrakenSet.DataSetName = "KrakenSet";
+            this.KrakenSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // groupBox1
             // 
@@ -136,6 +136,24 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Data";
+            // 
+            // txtNumOfRecords
+            // 
+            this.txtNumOfRecords.Location = new System.Drawing.Point(774, 14);
+            this.txtNumOfRecords.Name = "txtNumOfRecords";
+            this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
+            this.txtNumOfRecords.TabIndex = 5;
+            this.txtNumOfRecords.Text = "100";
+            this.txtNumOfRecords.TextChanged += new System.EventHandler(this.txtNumOfRecords_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(674, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Number of records";
             // 
             // optOrders
             // 
@@ -211,24 +229,6 @@
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(674, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Number of records";
-            // 
-            // txtNumOfRecords
-            // 
-            this.txtNumOfRecords.Location = new System.Drawing.Point(774, 14);
-            this.txtNumOfRecords.Name = "txtNumOfRecords";
-            this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
-            this.txtNumOfRecords.TabIndex = 5;
-            this.txtNumOfRecords.Text = "100";
-            this.txtNumOfRecords.TextChanged += new System.EventHandler(this.txtNumOfRecords_TextChanged);
-            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,8 +247,8 @@
             this.Load += new System.EventHandler(this.AlarmsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.krakenDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.krakenDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KrakenSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KrakenSet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
@@ -262,8 +262,8 @@
         private System.Windows.Forms.Button cmdExport;
         private System.Windows.Forms.Button cmdExit;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource krakenDataSetBindingSource;
-        private Datasets.krakenDataSet krakenDataSet;
+        private System.Windows.Forms.BindingSource KrakenSetBindingSource;
+        private Datasets.KrakenSet KrakenSet;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton optAlarms;
         private System.Windows.Forms.RadioButton optIndicators;

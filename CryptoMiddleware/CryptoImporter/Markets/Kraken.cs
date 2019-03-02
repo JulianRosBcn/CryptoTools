@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MySql.Data;
 
-namespace CryptoImporter
+namespace CryptoImporter.Markets
 {
     
 
-    public class KrakenFunctions
+    public class Kraken
     {
 
         public static void client_DownloadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -21,11 +21,11 @@ namespace CryptoImporter
             Console.WriteLine(e.Result);
         }
 
-        public static void GetKrakenMarketData()
+        public static void GetMarketData()
         {
 
             WebClient client = new WebClient();
-            KrakenQuote krakenInfo = new KrakenQuote();
+            QuoteInfo krakenInfo = new QuoteInfo();
 
             try
             {
@@ -40,10 +40,10 @@ namespace CryptoImporter
                 krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
                 krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][1]);
 
-                Console.WriteLine(string.Format("Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
+                Console.WriteLine(string.Format("KRAKEN: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
                         krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now));
 
-                KrakenData.InsertQuoteData(krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData("kraken",krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
 
             }
 
@@ -53,20 +53,6 @@ namespace CryptoImporter
             }
         }
 
-    }
-
-
-    public class KrakenQuote
-    {
-        //API Returning always 24h accumulated values for volume,volumeavgprice and numoftrades
-        public double ask { get; set; }
-        public double bid { get; set; }
-        public double last { get; set; }
-        public double volume { get; set; }
-        public double volumetoday { get; set; }
-        public double volumeavgprice { get; set; }
-        public double numoftrades { get; set; }
-        public DateTime timestamp { get; set; }
     }
 
 
