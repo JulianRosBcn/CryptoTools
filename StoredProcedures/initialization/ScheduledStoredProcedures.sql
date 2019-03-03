@@ -1,9 +1,20 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateIndicators`()
 BEGIN
-	CALL SMACalculation("kraken");
-	CALL SMACalculation("binance");
-	CALL VolumeFlowCalculation("kraken");
-	CALL VolumeFlowCalculation("binance");
+	CALL SMACalculation("kraken","btcusd");
+	CALL SMACalculation("kraken","btcltc");
+	CALL SMACalculation("kraken","btceth");
+	
+	CALL SMACalculation("binance","btcusd");
+	CALL SMACalculation("binance","btcltc");
+	CALL SMACalculation("binance","btceth");
+	
+	CALL VolumeFlowCalculation("kraken","btcusd");
+	CALL VolumeFlowCalculation("kraken","btcltc");
+	CALL VolumeFlowCalculation("kraken","btceth");
+	
+	CALL VolumeFlowCalculation("binance","btcusd");
+	CALL VolumeFlowCalculation("binance","btcltc");
+	CALL VolumeFlowCalculation("binance","btceth");
 END
 
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateAlarms`()
