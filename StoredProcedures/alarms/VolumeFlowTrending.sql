@@ -1,5 +1,6 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `VolumeFlowTrending`(
-_market VARCHAR(20)
+_market VARCHAR(20),
+_coinpair VARCHAR(20)
 )
 
 BEGIN
@@ -9,12 +10,12 @@ BEGIN
 	
 	SET time_zone='+01:00';
 	
-	SET @query = CONCAT('SELECT volume5min FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	SET @query = CONCAT('SELECT volume5min FROM analytics.',_market,'_indicators WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_last5minvolume := @query_output;
 	
-	SET @query = CONCAT('SELECT volume60min FROM analytics.',_market,'_indicators ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	SET @query = CONCAT('SELECT volume60min FROM analytics.',_market,'_indicators WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_last60minvolume := @query_output;
@@ -27,12 +28,14 @@ BEGIN
 	IF (_market = 'kraken') THEN
 		UPDATE analytics.kraken_alarms
 		SET `volumeflow_trending` = volumeflow_trending
+		WHERE `coinpair` = _coinpair
 		ORDER BY timestamp DESC LIMIT 1;
 	END IF;
 	
 	IF (_market = 'binance') THEN
 		UPDATE analytics.binance_alarms
 		SET `volumeflow_trending` = volumeflow_trending
+		WHERE `coinpair` = _coinpair
 		ORDER BY timestamp DESC LIMIT 1;
 	END IF;
 	

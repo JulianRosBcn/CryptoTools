@@ -19,11 +19,23 @@ END
 
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateAlarms`()
 BEGIN
-	CALL SMATrending("kraken");
-	CALL SMATrending("binance");
-	CALL VolumeFlowTrending("kraken");
-	CALL VolumeFlowTrending("binance");
+	CALL SMATrending("kraken","btcusd");
+	CALL SMATrending("kraken","btcltc");
+	CALL SMATrending("kraken","btceth");
+	
+	CALL SMATrending("binance","btcusd");
+	CALL SMATrending("binance","btcltc");
+	CALL SMATrending("binance","btceth");
+	
+	CALL VolumeFlowTrending("kraken","btcusd");
+	CALL VolumeFlowTrending("kraken","btcltc");
+	CALL VolumeFlowTrending("kraken","btceth");
+	
+	CALL VolumeFlowTrending("binance","btcusd");
+	CALL VolumeFlowTrending("binance","btcltc");
+	CALL VolumeFlowTrending("binance","btceth");
 END
+
 
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
 BEGIN
