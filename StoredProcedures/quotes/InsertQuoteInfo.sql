@@ -12,7 +12,7 @@ BEGIN
 	SET @query_output = '';
 	
 	
-	SET @query = CONCAT('SELECT volume FROM ',_market,'_quotes WHERE volume <> 0 ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	SET @query = CONCAT('SELECT volume FROM ',_market,'_quotes WHERE (volume <> 0) AND (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
 	-- IF VOLUME REMAINS THE SAME THAN PREVIOUS THEN NO VOLUME HAS BEEN WAGERED
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;

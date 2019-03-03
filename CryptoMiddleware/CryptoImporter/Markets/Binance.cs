@@ -66,10 +66,10 @@ namespace CryptoImporter.Markets
                 // GETTING QUOTES BTCETH
                 BinanceInfo.market = "binance";
                 BinanceInfo.coinpair = "btceth";
-                BinanceInfo.ask = Convert.ToDouble(tmp[1]["askPrice"]);
-                BinanceInfo.bid = Convert.ToDouble(tmp[1]["bidPrice"]);
-                BinanceInfo.last = Convert.ToDouble(tmp[1]["lastPrice"]);
-                BinanceInfo.volume = Convert.ToDouble(tmp[1]["lastQty"]);
+                BinanceInfo.ask = Convert.ToDouble(tmp[0]["askPrice"]);
+                BinanceInfo.bid = Convert.ToDouble(tmp[0]["bidPrice"]);
+                BinanceInfo.last = Convert.ToDouble(tmp[0]["lastPrice"]);
+                BinanceInfo.volume = Convert.ToDouble(tmp[0]["lastQty"]);
 
                 Console.WriteLine(string.Format("BINANCE BTCETH: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
                         BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now));

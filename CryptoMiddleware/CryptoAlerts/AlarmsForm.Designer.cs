@@ -51,6 +51,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.optBinance = new System.Windows.Forms.RadioButton();
             this.optKraken = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.optBTCETH = new System.Windows.Forms.RadioButton();
+            this.optBTCLTC = new System.Windows.Forms.RadioButton();
+            this.optBTCUSD = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KrakenSetBindingSource)).BeginInit();
@@ -58,6 +62,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
@@ -72,7 +77,7 @@
             chartArea1.Position.Width = 94F;
             chartArea1.Position.Y = 3F;
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Location = new System.Drawing.Point(13, 12);
+            this.chart1.Location = new System.Drawing.Point(-1, 12);
             this.chart1.Name = "chart1";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
@@ -80,7 +85,7 @@
             series1.IsVisibleInLegend = false;
             series1.Name = "BTC USD Quote";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(870, 214);
+            this.chart1.Size = new System.Drawing.Size(948, 214);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -111,9 +116,9 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.DataSource = this.KrakenSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 423);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 423);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(870, 170);
+            this.dataGridView1.Size = new System.Drawing.Size(926, 170);
             this.dataGridView1.TabIndex = 3;
             // 
             // KrakenSetBindingSource
@@ -134,16 +139,16 @@
             this.groupBox1.Controls.Add(this.optAlarms);
             this.groupBox1.Controls.Add(this.optIndicators);
             this.groupBox1.Controls.Add(this.optQuotes);
-            this.groupBox1.Location = new System.Drawing.Point(277, 372);
+            this.groupBox1.Location = new System.Drawing.Point(452, 372);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 45);
+            this.groupBox1.Size = new System.Drawing.Size(486, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Data";
             // 
             // txtNumOfRecords
             // 
-            this.txtNumOfRecords.Location = new System.Drawing.Point(538, 16);
+            this.txtNumOfRecords.Location = new System.Drawing.Point(417, 16);
             this.txtNumOfRecords.Name = "txtNumOfRecords";
             this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
             this.txtNumOfRecords.TabIndex = 5;
@@ -152,7 +157,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(426, 21);
+            this.label1.Location = new System.Drawing.Point(317, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 4;
@@ -161,7 +166,7 @@
             // optOrders
             // 
             this.optOrders.AutoSize = true;
-            this.optOrders.Location = new System.Drawing.Point(327, 19);
+            this.optOrders.Location = new System.Drawing.Point(245, 19);
             this.optOrders.Name = "optOrders";
             this.optOrders.Size = new System.Drawing.Size(56, 17);
             this.optOrders.TabIndex = 3;
@@ -172,7 +177,7 @@
             // optAlarms
             // 
             this.optAlarms.AutoSize = true;
-            this.optAlarms.Location = new System.Drawing.Point(226, 19);
+            this.optAlarms.Location = new System.Drawing.Point(173, 19);
             this.optAlarms.Name = "optAlarms";
             this.optAlarms.Size = new System.Drawing.Size(56, 17);
             this.optAlarms.TabIndex = 2;
@@ -183,7 +188,7 @@
             // optIndicators
             // 
             this.optIndicators.AutoSize = true;
-            this.optIndicators.Location = new System.Drawing.Point(113, 19);
+            this.optIndicators.Location = new System.Drawing.Point(84, 19);
             this.optIndicators.Name = "optIndicators";
             this.optIndicators.Size = new System.Drawing.Size(71, 17);
             this.optIndicators.TabIndex = 1;
@@ -194,7 +199,7 @@
             // optQuotes
             // 
             this.optQuotes.AutoSize = true;
-            this.optQuotes.Location = new System.Drawing.Point(9, 19);
+            this.optQuotes.Location = new System.Drawing.Point(6, 19);
             this.optQuotes.Name = "optQuotes";
             this.optQuotes.Size = new System.Drawing.Size(59, 17);
             this.optQuotes.TabIndex = 0;
@@ -215,9 +220,10 @@
             chartArea2.Position.Auto = false;
             chartArea2.Position.Height = 94F;
             chartArea2.Position.Width = 94F;
+            chartArea2.Position.X = 4F;
             chartArea2.Position.Y = 3F;
             this.chart2.ChartAreas.Add(chartArea2);
-            this.chart2.Location = new System.Drawing.Point(13, 233);
+            this.chart2.Location = new System.Drawing.Point(-1, 233);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
@@ -228,7 +234,7 @@
             series2.MarkerColor = System.Drawing.Color.White;
             series2.Name = "volume";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(871, 133);
+            this.chart2.Size = new System.Drawing.Size(915, 133);
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
@@ -236,9 +242,9 @@
             // 
             this.groupBox2.Controls.Add(this.optBinance);
             this.groupBox2.Controls.Add(this.optKraken);
-            this.groupBox2.Location = new System.Drawing.Point(14, 372);
+            this.groupBox2.Location = new System.Drawing.Point(12, 372);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(257, 45);
+            this.groupBox2.Size = new System.Drawing.Size(158, 45);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Select Exchange";
@@ -246,7 +252,7 @@
             // optBinance
             // 
             this.optBinance.AutoSize = true;
-            this.optBinance.Location = new System.Drawing.Point(137, 19);
+            this.optBinance.Location = new System.Drawing.Point(80, 19);
             this.optBinance.Name = "optBinance";
             this.optBinance.Size = new System.Drawing.Size(64, 17);
             this.optBinance.TabIndex = 1;
@@ -257,7 +263,7 @@
             // optKraken
             // 
             this.optKraken.AutoSize = true;
-            this.optKraken.Location = new System.Drawing.Point(33, 19);
+            this.optKraken.Location = new System.Drawing.Point(6, 19);
             this.optKraken.Name = "optKraken";
             this.optKraken.Size = new System.Drawing.Size(59, 17);
             this.optKraken.TabIndex = 0;
@@ -265,12 +271,58 @@
             this.optKraken.UseVisualStyleBackColor = true;
             this.optKraken.CheckedChanged += new System.EventHandler(this.optKraken_CheckedChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.optBTCETH);
+            this.groupBox3.Controls.Add(this.optBTCLTC);
+            this.groupBox3.Controls.Add(this.optBTCUSD);
+            this.groupBox3.Location = new System.Drawing.Point(189, 372);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(243, 45);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Select Coin Pair";
+            // 
+            // optBTCETH
+            // 
+            this.optBTCETH.AutoSize = true;
+            this.optBTCETH.Location = new System.Drawing.Point(169, 19);
+            this.optBTCETH.Name = "optBTCETH";
+            this.optBTCETH.Size = new System.Drawing.Size(68, 17);
+            this.optBTCETH.TabIndex = 2;
+            this.optBTCETH.Text = "BTCETH";
+            this.optBTCETH.UseVisualStyleBackColor = true;
+            this.optBTCETH.CheckedChanged += new System.EventHandler(this.optBTCETH_CheckedChanged);
+            // 
+            // optBTCLTC
+            // 
+            this.optBTCLTC.AutoSize = true;
+            this.optBTCLTC.Location = new System.Drawing.Point(90, 19);
+            this.optBTCLTC.Name = "optBTCLTC";
+            this.optBTCLTC.Size = new System.Drawing.Size(66, 17);
+            this.optBTCLTC.TabIndex = 1;
+            this.optBTCLTC.Text = "BTCLTC";
+            this.optBTCLTC.UseVisualStyleBackColor = true;
+            this.optBTCLTC.CheckedChanged += new System.EventHandler(this.optBTCLTC_CheckedChanged);
+            // 
+            // optBTCUSD
+            // 
+            this.optBTCUSD.AutoSize = true;
+            this.optBTCUSD.Location = new System.Drawing.Point(6, 19);
+            this.optBTCUSD.Name = "optBTCUSD";
+            this.optBTCUSD.Size = new System.Drawing.Size(69, 17);
+            this.optBTCUSD.TabIndex = 0;
+            this.optBTCUSD.Text = "BTCUSD";
+            this.optBTCUSD.UseVisualStyleBackColor = true;
+            this.optBTCUSD.CheckedChanged += new System.EventHandler(this.optBTCUSD_CheckedChanged);
+            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(896, 648);
+            this.ClientSize = new System.Drawing.Size(950, 648);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox1);
@@ -291,6 +343,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -315,6 +369,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton optBinance;
         private System.Windows.Forms.RadioButton optKraken;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton optBTCETH;
+        private System.Windows.Forms.RadioButton optBTCLTC;
+        private System.Windows.Forms.RadioButton optBTCUSD;
     }
 }
 
