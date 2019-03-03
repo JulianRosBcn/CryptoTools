@@ -1,4 +1,5 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `OrderManager`(
+_coinpair VARCHAR(20)
 )
 
 BEGIN
@@ -13,27 +14,27 @@ BEGIN
 	SET time_zone='+01:00';
 	
 	-- Kraken gathering data
-	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma5mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma20mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma60min_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma60min_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma60mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma24h_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma24h_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma24htrending := @query_output;
 	
-	SET @query = CONCAT('SELECT volumeflow_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT volumeflow_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_volumeflowtrending := @query_output;
@@ -47,27 +48,27 @@ BEGIN
 	-- ------------------------------------------------------------------------------------------------------------
 	-- Binance gathering data
 	
-	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.binance_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.binance_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma5mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.binance_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.binance_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma20mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma60min_trending FROM analytics.binance_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma60min_trending FROM analytics.binance_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma60mintrending := @query_output;
 	
-	SET @query = CONCAT('SELECT sma24h_trending FROM analytics.binance_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT sma24h_trending FROM analytics.binance_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_sma24htrending := @query_output;
 	
-	SET @query = CONCAT('SELECT volumeflow_trending FROM analytics.kraken_alarms ORDER BY timestamp DESC LIMIT 1');
+	SET @query = CONCAT('SELECT volumeflow_trending FROM analytics.kraken_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1');
 	PREPARE exec_query FROM @query;
 	EXECUTE exec_query;
 	SET @_volumeflowtrending := @query_output;
@@ -81,7 +82,7 @@ BEGIN
 	-- ------------------------------------------------------------------------------------------------------------
 	
 	
-	SET @_lastorder := (SELECT `order` FROM orders ORDER BY timestamp DESC LIMIT 1);
+	SET @_lastorder := (SELECT `order` FROM orders  WHERE (coinpair = _coinpair ) ORDER BY timestamp DESC LIMIT 1);
 	
 	-- buy top
 	IF  (@_binancestate = "buy") AND (@_krakenstate = "buy") AND (@_lastorder <> "buy") THEN 
@@ -98,8 +99,8 @@ BEGIN
 	
 	-- Update values in orders table
 	IF (_order IS NOT NULL) AND (_type IS NOT NULL) THEN
-		INSERT INTO orders (`order`,`type`,`timestamp`)
-		VALUES (_order,_type,NOW());
+		INSERT INTO orders (`coinpair`,`order`,`type`,`timestamp`)
+		VALUES (_coinpair,_order,_type,NOW());
 	END IF;
 	
 	

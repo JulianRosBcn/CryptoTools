@@ -39,6 +39,8 @@ END
 
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
 BEGIN
-	CALL OrderManager();
+	CALL OrderManager("btcusd");
+	CALL OrderManager("btcltc");
+	CALL OrderManager("btceth");
 END
 
