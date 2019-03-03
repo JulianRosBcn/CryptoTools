@@ -9,6 +9,8 @@ namespace CryptoImporter.Markets
     public class QuoteInfo
     {
         //API Returning always 24h accumulated values for volume,volumeavgprice and numoftrades
+        public string market { get; set; }
+        public string coinpair { get; set; }
         public double ask { get; set; }
         public double bid { get; set; }
         public double last { get; set; }

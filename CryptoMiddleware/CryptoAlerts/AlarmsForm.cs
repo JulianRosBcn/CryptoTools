@@ -16,9 +16,12 @@ namespace CryptoAlerts
 {
     public partial class AlarmsForm : Form
     {
+        public static string market;    
+        public static string coinpair;
+        public static string data;      //used to switch between data options buttons in datagridload and chartupdate process
 
         public static string query;
-        public static string querychart = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT ";// used only for chart refresh, static value
+        public static string querychart;
 
 
         public AlarmsForm()
@@ -34,7 +37,7 @@ namespace CryptoAlerts
         private void cmdExport_Click(object sender, EventArgs e)
         {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -65,7 +68,12 @@ namespace CryptoAlerts
         private void DataGridLoad()
         {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+
+            if (data == "quotes") { connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString; }
+            if (data == "indicators") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
+            if (data == "alarms") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
+            if (data == "orders") { connectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString; }
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -89,39 +97,54 @@ namespace CryptoAlerts
         private void AlarmsForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            market = "kraken"; //review by radiobutton initialization does not generate handler
+            coinpair = "btcusd"; //review by radiobutton initialization does not generate handler
             optQuotes.Checked = true;
-
-            timer.Interval = 5000;
+            optKraken.Checked = true;
+            optBTCUSD.Checked = true;
+            
+            timer.Interval = 1000;
             timer.Start();
         }
 
         private void optIndicators_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `indicators` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
+            data = "indicators";
+            queryBuilder();
             if (optIndicators.Checked == true) { DataGridLoad(); }
         }
 
         private void optAlarms_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `alarms` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
+            data = "alarms";
+            queryBuilder();
             if (optAlarms.Checked == true) { DataGridLoad(); }
         }
 
         private void optQuotes_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `quotes` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
+            data = "quotes";
+            queryBuilder();
             if (optQuotes.Checked == true) { DataGridLoad(); }
         }
 
         private void optOrders_CheckedChanged(object sender, EventArgs e)
         {
-            query = "SELECT * FROM `orders` ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text;
+            data = "orders";
+            queryBuilder();
             if (optOrders.Checked == true) { DataGridLoad(); }
+        }
+
+        private void queryBuilder()
+        {
+            if (data == "orders") { query = "SELECT * FROM `orders` WHERE coinpair = '" + coinpair + "' ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text; }
+            else { query = "SELECT * FROM `" + market + "_" + data + "` WHERE (coinpair = '" + coinpair + "') ORDER BY timestamp DESC LIMIT " + txtNumOfRecords.Text; }
         }
 
         private void UpdateCharts()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+            querychart = "SELECT * FROM `" + market + "_quotes`  WHERE coinpair = '" + coinpair + "' ORDER BY timestamp DESC LIMIT ";
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -134,7 +157,10 @@ namespace CryptoAlerts
                     this.chart1.DataSource = dt;
                     this.chart1.Series[0].XValueMember = "timestamp";
                     this.chart1.Series[0].YValueMembers = "last";
-                    this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} $";
+
+                    if (coinpair == "btcusd") { this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "{0:0.} $USD$"; }
+                    else { this.chart1.ChartAreas[0].AxisY.LabelStyle.Format = "0.00000 BTC"; }
+
                     this.chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
                     this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
                     this.chart1.Series[0].XValueType = ChartValueType.DateTime;
@@ -145,7 +171,7 @@ namespace CryptoAlerts
                     this.chart2.DataSource = dt;
                     this.chart2.Series[0].XValueMember = "timestamp";
                     this.chart2.Series[0].YValueMembers = "volume";
-                    this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.0 Btc";
+                    this.chart2.ChartAreas[0].AxisY.LabelStyle.Format = "0.0 BTC";
                     this.chart2.ChartAreas[0].AxisY.IsStartedFromZero = true;
                     this.chart2.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
                     this.chart2.Series[0].XValueType = ChartValueType.DateTime;
@@ -162,9 +188,39 @@ namespace CryptoAlerts
             UpdateCharts();
         }
 
-        private void txtNumOfRecords_TextChanged(object sender, EventArgs e)
+        private void optBinance_CheckedChanged(object sender, EventArgs e)
         {
+            market = "binance";
+            queryBuilder();
+            if (optBinance.Checked == true) { DataGridLoad(); }
+        }
 
+        private void optKraken_CheckedChanged(object sender, EventArgs e)
+        {
+            market = "kraken";
+            queryBuilder();
+            if (optKraken.Checked == true) { DataGridLoad(); }
+        }
+
+        private void optBTCUSD_CheckedChanged(object sender, EventArgs e)
+        {
+            coinpair = "btcusd";
+            queryBuilder();
+            if (optBTCUSD.Checked == true) { DataGridLoad(); }
+        }
+
+        private void optBTCLTC_CheckedChanged(object sender, EventArgs e)
+        {
+            coinpair = "btcltc";
+            queryBuilder();
+            if (optBTCLTC.Checked == true) { DataGridLoad(); }
+        }
+
+        private void optBTCETH_CheckedChanged(object sender, EventArgs e)
+        {
+            coinpair = "btceth";
+            queryBuilder();
+            if (optBTCETH.Checked == true) { DataGridLoad(); }
         }
     }
 }
