@@ -73,6 +73,7 @@ namespace CryptoAlerts
             if (data == "quotes") { connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString; }
             if (data == "indicators") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
             if (data == "alarms") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
+            if (data == "signals") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
             if (data == "orders") { connectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString; }
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -133,6 +134,13 @@ namespace CryptoAlerts
             data = "orders";
             queryBuilder();
             if (optOrders.Checked == true) { DataGridLoad(); }
+        }
+
+        private void optSignals_CheckedChanged(object sender, EventArgs e)
+        {
+            data = "signals";
+            queryBuilder();
+            if (optSignals.Checked == true) { DataGridLoad(); }
         }
 
         private void queryBuilder()
@@ -222,5 +230,6 @@ namespace CryptoAlerts
             queryBuilder();
             if (optBTCETH.Checked == true) { DataGridLoad(); }
         }
+
     }
 }

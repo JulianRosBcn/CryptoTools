@@ -36,6 +36,18 @@ BEGIN
 	CALL VolumeFlowTrending("binance","btceth");
 END
 
+CREATE DEFINER=`root`@`%` PROCEDURE `UpdateSignals`()
+BEGIN
+	CALL DetectSignals("kraken","btcusd");
+	CALL DetectSignals("kraken","btcltc");
+	CALL DetectSignals("kraken","btceth");
+	
+	CALL DetectSignals("binance","btcusd");
+	CALL DetectSignals("binance","btcltc");
+	CALL DetectSignals("binance","btceth");
+	
+
+END
 
 CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
 BEGIN

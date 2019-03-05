@@ -10,6 +10,11 @@ CREATE EVENT Event_Alarms
     DO 
 		CALL UpdateAlarms();
 		
+CREATE EVENT Event_Signals
+    ON SCHEDULE EVERY 1 MINUTE
+    DO 
+		CALL UpdateSignals();
+		
 CREATE EVENT Event_Orders
     ON SCHEDULE EVERY 1 MINUTE
     DO 

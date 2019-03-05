@@ -55,6 +55,7 @@
             this.optBTCETH = new System.Windows.Forms.RadioButton();
             this.optBTCLTC = new System.Windows.Forms.RadioButton();
             this.optBTCUSD = new System.Windows.Forms.RadioButton();
+            this.optSignals = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KrakenSetBindingSource)).BeginInit();
@@ -85,14 +86,14 @@
             series1.IsVisibleInLegend = false;
             series1.Name = "BTC USD Quote";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(948, 214);
+            this.chart1.Size = new System.Drawing.Size(1018, 214);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // cmdExport
             // 
             this.cmdExport.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExport.Location = new System.Drawing.Point(326, 599);
+            this.cmdExport.Location = new System.Drawing.Point(404, 599);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(116, 42);
             this.cmdExport.TabIndex = 1;
@@ -103,7 +104,7 @@
             // cmdExit
             // 
             this.cmdExit.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdExit.Location = new System.Drawing.Point(458, 599);
+            this.cmdExit.Location = new System.Drawing.Point(536, 599);
             this.cmdExit.Name = "cmdExit";
             this.cmdExit.Size = new System.Drawing.Size(128, 42);
             this.cmdExit.TabIndex = 2;
@@ -118,7 +119,7 @@
             this.dataGridView1.DataSource = this.KrakenSetBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 423);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(926, 170);
+            this.dataGridView1.Size = new System.Drawing.Size(996, 170);
             this.dataGridView1.TabIndex = 3;
             // 
             // KrakenSetBindingSource
@@ -133,6 +134,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.optSignals);
             this.groupBox1.Controls.Add(this.txtNumOfRecords);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.optOrders);
@@ -141,14 +143,14 @@
             this.groupBox1.Controls.Add(this.optQuotes);
             this.groupBox1.Location = new System.Drawing.Point(452, 372);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(486, 45);
+            this.groupBox1.Size = new System.Drawing.Size(556, 45);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Data";
             // 
             // txtNumOfRecords
             // 
-            this.txtNumOfRecords.Location = new System.Drawing.Point(417, 16);
+            this.txtNumOfRecords.Location = new System.Drawing.Point(488, 16);
             this.txtNumOfRecords.Name = "txtNumOfRecords";
             this.txtNumOfRecords.Size = new System.Drawing.Size(61, 20);
             this.txtNumOfRecords.TabIndex = 5;
@@ -157,7 +159,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(317, 21);
+            this.label1.Location = new System.Drawing.Point(388, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 4;
@@ -166,7 +168,7 @@
             // optOrders
             // 
             this.optOrders.AutoSize = true;
-            this.optOrders.Location = new System.Drawing.Point(245, 19);
+            this.optOrders.Location = new System.Drawing.Point(316, 19);
             this.optOrders.Name = "optOrders";
             this.optOrders.Size = new System.Drawing.Size(56, 17);
             this.optOrders.TabIndex = 3;
@@ -234,7 +236,7 @@
             series2.MarkerColor = System.Drawing.Color.White;
             series2.Name = "volume";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(915, 133);
+            this.chart2.Size = new System.Drawing.Size(985, 133);
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
             // 
@@ -316,12 +318,23 @@
             this.optBTCUSD.UseVisualStyleBackColor = true;
             this.optBTCUSD.CheckedChanged += new System.EventHandler(this.optBTCUSD_CheckedChanged);
             // 
+            // optSignals
+            // 
+            this.optSignals.AutoSize = true;
+            this.optSignals.Location = new System.Drawing.Point(245, 19);
+            this.optSignals.Name = "optSignals";
+            this.optSignals.Size = new System.Drawing.Size(59, 17);
+            this.optSignals.TabIndex = 6;
+            this.optSignals.Text = "Signals";
+            this.optSignals.UseVisualStyleBackColor = true;
+            this.optSignals.CheckedChanged += new System.EventHandler(this.optSignals_CheckedChanged);
+            // 
             // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(950, 648);
+            this.ClientSize = new System.Drawing.Size(1020, 648);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.chart2);
@@ -373,6 +386,7 @@
         private System.Windows.Forms.RadioButton optBTCETH;
         private System.Windows.Forms.RadioButton optBTCLTC;
         private System.Windows.Forms.RadioButton optBTCUSD;
+        private System.Windows.Forms.RadioButton optSignals;
     }
 }
 
