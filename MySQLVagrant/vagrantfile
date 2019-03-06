@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "file", source: "initialization.sql", destination: "vagrant/initialization.sql"
   config.vm.provision "file", source: "../MySQL", destination: "vagrant/"
   
-  config.vm.define :juliovm do |t|
+  config.vm.define :CryptoToolsDev do |t|
   end
 	
   #Configuration of MySQL Section
