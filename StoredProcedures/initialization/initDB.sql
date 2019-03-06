@@ -71,12 +71,14 @@ CREATE TABLE `binance_alarms` (
 CREATE TABLE `kraken_signals` (
   `coinpair` VARCHAR(20) NOT NULL, 
   `order` VARCHAR(20) NOT NULL,
+  `price` DOUBLE NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binance_signals` (
   `coinpair` VARCHAR(20) NOT NULL, 
   `order` VARCHAR(20) NOT NULL,	
+  `price` DOUBLE NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -90,5 +92,6 @@ USE orderbook;
 CREATE TABLE `orders` (
   `coinpair` VARCHAR(20) NOT NULL, 
   `order` VARCHAR(20) NOT NULL,
+  `price` DOUBLE NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

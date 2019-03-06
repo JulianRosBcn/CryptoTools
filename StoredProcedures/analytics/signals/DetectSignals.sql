@@ -37,6 +37,12 @@ BEGIN
 	EXECUTE exec_query;
 	SET @_volumeflowtrending := @query_output;
 	
+	-- Last quote in markets DB for this coinpair will be considered the price for the alarm
+	SET @query = CONCAT('SELECT last FROM markets.',_market,'_quotes WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
+	PREPARE exec_query FROM @query;
+	EXECUTE exec_query;
+	SET @_lastquote := @query_output;
+	
 	IF  (@_sma5mintrending = "sell") AND (@_sma20mintrending = "sell") AND (@_sma60mintrending = "sell") AND (@_sma24htrending = "sell") THEN 
 		SET _marketstate = "sell";
 	END IF;
@@ -61,15 +67,15 @@ BEGIN
 	
 	IF (_market = 'kraken') THEN
 	 IF (_order IS NOT NULL) THEN
-		INSERT INTO analytics.kraken_signals (`coinpair`,`order`,`timestamp`)
-		VALUES (_coinpair,_order,NOW());
+		INSERT INTO analytics.kraken_signals (`coinpair`,`order`,`price`,`timestamp`)
+		VALUES (_coinpair,_order,@_lastquote,NOW());
 	 END IF;
 	END IF;
 	
 	IF (_market = 'binance') THEN
 	 IF (_order IS NOT NULL) THEN
-		INSERT INTO analytics.binance_signals (`coinpair`,`order`,`timestamp`)
-		VALUES (_coinpair,_order,NOW());
+		INSERT INTO analytics.binance_signals (`coinpair`,`order`,`price`,`timestamp`)
+		VALUES (_coinpair,_order,@_lastquote,NOW());
 	 END IF;
 	END IF;
 	
