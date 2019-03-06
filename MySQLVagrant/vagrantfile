@@ -24,11 +24,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		DBNAME="markets"	
 		# Create a database with that name
 		RESULT=`mysqlshow --user=root --password=root $DBNAME| grep -v Wildcard | grep -o $DBNAME`
-		if [ "$RESULT" != $DBNAME ]; then mysqladmin -u root -ppass create $DBNAME
+		if [ "$RESULT" != $DBNAME ]; then mysqladmin -u root -proot create $DBNAME
 		fi
 
 		# Import the SQL Files into new database
-		`mysql -u root -ppass $DBNAME < vagrant/initialization.sql`
+		`mysql -u root -proot $DBNAME < vagrant/initialization.sql`
 		
   
   SCRIPT
