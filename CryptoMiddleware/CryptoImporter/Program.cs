@@ -10,9 +10,13 @@ namespace CryptoImporter
 {
     class Program
     {
+        public static string mySQLServerIP = "192.168.56.50";
+
         static void Main(string[] args)
         {
             //Delete all existing data in DBs
+
+            if (args.Length > 0) { mySQLServerIP = args[0];  }
 
             MySQLData.MarketData.RemoveQuoteData("kraken");
             MySQLData.MarketData.RemoveQuoteData("binance");

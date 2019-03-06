@@ -37,7 +37,7 @@ namespace CryptoAlerts
         private void cmdExport_Click(object sender, EventArgs e)
         {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+            string connectionString = ((ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP));
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -70,11 +70,11 @@ namespace CryptoAlerts
 
             string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
 
-            if (data == "quotes") { connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString; }
-            if (data == "indicators") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
-            if (data == "alarms") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
-            if (data == "signals") { connectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString; }
-            if (data == "orders") { connectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString; }
+            if (data == "quotes") { connectionString = ((ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP)); }
+            if (data == "indicators") { connectionString = ((ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP)); }
+            if (data == "alarms") { connectionString = ((ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP)); }
+            if (data == "signals") { connectionString = ((ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP)); }
+            if (data == "orders") { connectionString = ((ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP)); }
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -151,7 +151,7 @@ namespace CryptoAlerts
 
         private void UpdateCharts()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
+            string connectionString = ((ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString).Replace("servername", CryptoAlerts.Program.mySQLServerIP));
             querychart = "SELECT * FROM `" + market + "_quotes`  WHERE coinpair = '" + coinpair + "' ORDER BY timestamp DESC LIMIT ";
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))

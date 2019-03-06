@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `InsertQuoteInfo`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS markets.DeleteAnalyticsTableData;
+
+CREATE DEFINER=`root`@`%` PROCEDURE markets.InsertQuoteInfo(
 _market VARCHAR(20),
 _coinpair VARCHAR(20),
 _ask DOUBLE,
@@ -28,3 +32,5 @@ BEGIN
     IF (_market = 'binance') THEN INSERT INTO markets.binance_quotes (`coinpair`,`ask`,`bid`,`last`, `volume`,`timestamp`) VALUES (_coinpair,_ask,_bid,_last,_volume,_timestamp);
 	END IF;
 END
+
+|

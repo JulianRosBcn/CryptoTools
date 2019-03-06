@@ -1,4 +1,8 @@
-CREATE PROCEDURE `DeleteQuotesTableData`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS markets.DeleteQuotesTableData;
+
+CREATE PROCEDURE markets.DeleteQuotesTableData(
 _market VARCHAR(20)
 )
 
@@ -9,3 +13,5 @@ BEGIN
     IF (_market = 'binance') THEN DELETE FROM binance_quotes;
 	END IF;
 END
+
+|

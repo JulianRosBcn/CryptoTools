@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `OrderManager`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS orderbook.OrderManager;
+
+CREATE DEFINER=`root`@`%` PROCEDURE orderbook.OrderManager(
 _coinpair VARCHAR(20)
 )
 BEGIN
@@ -10,7 +14,7 @@ BEGIN
 	DECLARE _krakenstate VARCHAR(10) DEFAULT "neutral"; -- BUY / SELL / NEUTRAL 
 	DECLARE _binancestate VARCHAR(10) DEFAULT "neutral"; -- BUY / SELL / NEUTRAL
 
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 
 	
 	-- Kraken gathering
@@ -69,3 +73,5 @@ BEGIN
 
 	-- SELECT _krakenstate, _binancestate, _order, _lastorder;
 END
+
+|

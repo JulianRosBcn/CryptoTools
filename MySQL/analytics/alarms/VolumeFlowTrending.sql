@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `VolumeFlowTrending`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.VolumeFlowTrending;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.VolumeFlowTrending(
 _market VARCHAR(20),
 _coinpair VARCHAR(20)
 )
@@ -8,7 +12,7 @@ BEGIN
 	-- Variables to store state of the alarm 
 	DECLARE volumeflow_trending VARCHAR(10) DEFAULT "neutral";
 	
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 	
 	SET @query = CONCAT('SELECT volume5min FROM analytics.',_market,'_indicators WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
 	PREPARE exec_query FROM @query;
@@ -41,3 +45,5 @@ BEGIN
 	
 	
 END 
+
+|

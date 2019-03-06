@@ -1,11 +1,15 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `SMACalculation`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.SMACalculation;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.SMACalculation(
 _market VARCHAR(20),
 _coinpair VARCHAR(20)
 )
 
 BEGIN
 
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 	
 	SET @query = CONCAT('SELECT AVG(last) FROM markets.',_market,'_quotes WHERE (timestamp > (NOW() - INTERVAL 5 minute))  AND (coinpair = "',_coinpair, '") INTO @query_output');
 	PREPARE exec_query FROM @query;
@@ -37,3 +41,5 @@ BEGIN
 	END IF;
 	
 END
+
+|
