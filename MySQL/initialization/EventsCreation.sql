@@ -1,5 +1,5 @@
 
--- SET GLOBAL event_scheduler = ON;
+   SET GLOBAL event_scheduler = ON;
 
 CREATE EVENT IF NOT EXISTS Event_Indicators
     ON SCHEDULE EVERY 1 MINUTE
