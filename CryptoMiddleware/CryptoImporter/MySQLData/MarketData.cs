@@ -8,69 +8,60 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 
 
-namespace CryptoImporter
+namespace CryptoImporter.MySQLData
 {
     
-    public class KrakenData
+    public class MarketData
     {
 
-        public static string mysqlconnectionstring  =  ConfigurationManager.ConnectionStrings["KrakenConnectionString"].ConnectionString;
+        public static string MarketsConnectionString =  (ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString).Replace("servername",CryptoImporter.Program.mySQLServerIP);
+        public static string AnalyticsConnectionString = (ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString).Replace("servername", CryptoImporter.Program.mySQLServerIP);
+        public static string OrderBookConnectionString = (ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString).Replace("servername", CryptoImporter.Program.mySQLServerIP);
 
-        public static void InsertQuoteData(double ask, double bid, double last, double volume, double volumetoday, double volumeavgprice, double numoftrades, DateTime timestamp)
+
+        public static void InsertQuoteData(string market, string coinpair, double ask, double bid, double last, double volume, DateTime timestamp)
         {
 
-            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-        {
+            using (MySqlConnection mysqlcon = new MySqlConnection(MarketsConnectionString))
+            {
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("InsertQuoteInfo", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_market", market);
+                mysqlcmd.Parameters.AddWithValue("_coinpair", coinpair);
                 mysqlcmd.Parameters.AddWithValue("_ask", ask);
                 mysqlcmd.Parameters.AddWithValue("_bid", bid);
                 mysqlcmd.Parameters.AddWithValue("_last", last);
                 mysqlcmd.Parameters.AddWithValue("_volume", volume);
-                mysqlcmd.Parameters.AddWithValue("_volumetoday", volumetoday);
-                mysqlcmd.Parameters.AddWithValue("_volumeavgprice", volumeavgprice);
-                mysqlcmd.Parameters.AddWithValue("_numoftrades", numoftrades);
                 mysqlcmd.Parameters.AddWithValue("_timestamp", timestamp);
                 mysqlcmd.ExecuteNonQuery();
             }
                
         }
         
-        public static void RemoveQuoteData()
+        public static void RemoveQuoteData(string market)
         {
 
-            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+            using (MySqlConnection mysqlcon = new MySqlConnection(MarketsConnectionString))
             {
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("DeleteQuotesTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_market", market);
                 mysqlcmd.ExecuteNonQuery();
             }
 
         }
 
-        public static void RemoveIndicatorsData()
+        public static void RemoveAnalyticsData(string market)
         {
 
-            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+            using (MySqlConnection mysqlcon = new MySqlConnection(AnalyticsConnectionString))
             {
                 mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("DeleteIndicatorsTableData", mysqlcon);
+                MySqlCommand mysqlcmd = new MySqlCommand("DeleteAnalyticsTableData", mysqlcon);
                 mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
-                mysqlcmd.ExecuteNonQuery();
-            }
-
-        }
-
-        public static void RemoveAlarmsData()
-        {
-
-            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
-            {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("DeleteAlarmsTableData", mysqlcon);
-                mysqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_market", market);
                 mysqlcmd.ExecuteNonQuery();
             }
 
@@ -79,7 +70,7 @@ namespace CryptoImporter
         public static void RemoveOrdersData()
         {
 
-            using (MySqlConnection mysqlcon = new MySqlConnection(mysqlconnectionstring))
+            using (MySqlConnection mysqlcon = new MySqlConnection(OrderBookConnectionString))
             {
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("DeleteOrdersTableData", mysqlcon);

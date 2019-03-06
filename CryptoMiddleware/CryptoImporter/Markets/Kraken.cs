@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MySql.Data;
 
-namespace CryptoImporter
+namespace CryptoImporter.Markets
 {
     
 
-    public class KrakenFunctions
+    public class Kraken
     {
 
         public static void client_DownloadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -21,32 +21,66 @@ namespace CryptoImporter
             Console.WriteLine(e.Result);
         }
 
-        public static void GetKrakenMarketData()
+        public static void GetMarketData()
         {
 
             WebClient client = new WebClient();
-            KrakenQuote krakenInfo = new KrakenQuote();
+            QuoteInfo krakenInfo = new QuoteInfo();
+            string webresponse;
+            JObject tmp;
 
             try
             {
-
-                // GETTING QUOTES
-                string webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=XBTEUR");
+                // GETTING QUOTES BTCUSD
+                webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=XBTUSD");
                 
-                JObject tmp = JObject.Parse(webresponse);
+                tmp = JObject.Parse(webresponse);
 
-                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["a"][0]);
-                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["b"][0]);
-                krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][0]);
-                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["c"][1]);
-                krakenInfo.volumetoday = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["v"][0]);
-                krakenInfo.volumeavgprice = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["p"][0]);
-                krakenInfo.numoftrades = Convert.ToDouble(tmp["result"]["XXBTZEUR"]["t"][0]);
+                krakenInfo.market = "kraken";
+                krakenInfo.coinpair = "btcusd";
+                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["a"][0]);
+                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["b"][0]);
+                krakenInfo.last = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["c"][0]);
+                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["c"][1]);
 
-                Console.WriteLine(string.Format("Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | VolumeAVGPrice:{4} | NumOfTrades:{5} | Timestamp:{6}",
-                        krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, krakenInfo.volumetoday, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now));
+                Console.WriteLine(string.Format("KRAKEN BTCUSD: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
 
-                KrakenData.InsertQuoteData(krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, krakenInfo.volumetoday, krakenInfo.volumeavgprice, krakenInfo.numoftrades, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+
+                // GETTING QUOTES BTCLTC
+                webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=LTCXBT");
+
+                tmp = JObject.Parse(webresponse);
+
+                krakenInfo.market = "kraken";
+                krakenInfo.coinpair = "btcltc";
+                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XLTCXXBT"]["a"][0]);
+                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XLTCXXBT"]["b"][0]);
+                krakenInfo.last = Convert.ToDouble(tmp["result"]["XLTCXXBT"]["c"][0]);
+                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XLTCXXBT"]["c"][1]);
+
+                Console.WriteLine(string.Format("KRAKEN BTCLTC: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
+
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+
+                // GETTING QUOTES BTCETH
+                webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=ETHXBT");
+
+                tmp = JObject.Parse(webresponse);
+
+                krakenInfo.market = "kraken";
+                krakenInfo.coinpair = "btceth";
+                krakenInfo.ask = Convert.ToDouble(tmp["result"]["XETHXXBT"]["a"][0]);
+                krakenInfo.bid = Convert.ToDouble(tmp["result"]["XETHXXBT"]["b"][0]);
+                krakenInfo.last = Convert.ToDouble(tmp["result"]["XETHXXBT"]["c"][0]);
+                krakenInfo.volume = Convert.ToDouble(tmp["result"]["XETHXXBT"]["c"][1]);
+
+                Console.WriteLine(string.Format("KRAKEN BTCETH: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
+
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
 
             }
 
@@ -56,20 +90,6 @@ namespace CryptoImporter
             }
         }
 
-    }
-
-
-    public class KrakenQuote
-    {
-        //API Returning always 24h accumulated values for volume,volumeavgprice and numoftrades
-        public double ask { get; set; }
-        public double bid { get; set; }
-        public double last { get; set; }
-        public double volume { get; set; }
-        public double volumetoday { get; set; }
-        public double volumeavgprice { get; set; }
-        public double numoftrades { get; set; }
-        public DateTime timestamp { get; set; }
     }
 
 

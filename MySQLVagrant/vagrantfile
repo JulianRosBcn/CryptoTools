@@ -9,6 +9,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.vm.network :forwarded_port, guest: 3306, host: 3306
   config.vm.provision :shell, :path => "install.sh"
-  config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=666"]
+  config.vm.synced_folder ".", "/vagrantbox", :mount_options => ["dmode=777", "fmode=666"]
   config.vm.network "private_network", ip: "192.168.56.50"
+  config.vm.provision "file", source: "initialization.sql", destination: "vagrant/initialization.sql"
+  config.vm.provision "file", source: "../MySQL", destination: "vagrant/"
+  
+  config.vm.define :CryptoToolsDev do |t|
+  end
+	
+  #Configuration of MySQL Section
+  
+  $script = <<-SCRIPT
+
+		DBNAME="markets"	
+		# Create a database with that name
+		RESULT=`mysqlshow --user=root --password=root $DBNAME| grep -v Wildcard | grep -o $DBNAME`
+		if [ "$RESULT" != $DBNAME ]; then mysqladmin -u root -proot create $DBNAME
+		fi
+
+		# Import the SQL Files into new database
+		`mysql -u root -proot $DBNAME < vagrant/initialization.sql`
+		
+  
+  SCRIPT
+  
+  config.vm.provision :shell, :inline => $script
+  
 end
