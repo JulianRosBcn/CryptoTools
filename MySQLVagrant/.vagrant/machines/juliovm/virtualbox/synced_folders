@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrantbox":{"mount_options":["dmode=777","fmode=666","uid=1000","gid=1000"],"guestpath":"/vagrantbox","hostpath":"D:/JULIANROSBCN/CryptoTools/MySQLVagrant","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/vagrantbox":{"mount_options":["dmode=777","fmode=666","uid=1000","gid=1000"],"guestpath":"/vagrantbox","hostpath":"D:/jordi/CryptoTools/MySQLVagrant","disabled":false,"__vagrantfile":true}}}
