@@ -14,9 +14,9 @@ namespace CryptoImporter.MySQLData
     public class MarketData
     {
 
-        public static string MarketsConnectionString =  ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString;
-        public static string AnalyticsConnectionString = ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString;
-        public static string OrderBookConnectionString = ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString;
+        public static string MarketsConnectionString =  (ConfigurationManager.ConnectionStrings["MarketsConnectionString"].ConnectionString).Replace("servername",CryptoImporter.Program.mySQLServerIP);
+        public static string AnalyticsConnectionString = (ConfigurationManager.ConnectionStrings["AnalyticsConnectionString"].ConnectionString).Replace("servername", CryptoImporter.Program.mySQLServerIP);
+        public static string OrderBookConnectionString = (ConfigurationManager.ConnectionStrings["OrderBookConnectionString"].ConnectionString).Replace("servername", CryptoImporter.Program.mySQLServerIP);
 
 
         public static void InsertQuoteData(string market, string coinpair, double ask, double bid, double last, double volume, DateTime timestamp)

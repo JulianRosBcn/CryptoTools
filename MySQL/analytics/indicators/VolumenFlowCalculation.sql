@@ -1,11 +1,15 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `VolumeFlowCalculation`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.VolumeFlowCalculation;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.VolumeFlowCalculation(
 _market VARCHAR(20),
 _coinpair VARCHAR(20)
 )
 
 BEGIN
 
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 	
 	SET @query = CONCAT('SELECT SUM(volume) FROM markets.',_market,'_quotes WHERE (timestamp > (NOW() - INTERVAL 5 minute))  AND (coinpair = "',_coinpair, '") INTO @query_output');
 	PREPARE exec_query FROM @query;
@@ -35,3 +39,5 @@ BEGIN
 	END IF;
 	
 END
+
+|

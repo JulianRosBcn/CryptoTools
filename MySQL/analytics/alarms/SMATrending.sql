@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `SMATrending`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.SMATrending;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.SMATrending(
 _market VARCHAR(20),
 _coinpair VARCHAR(20)
 )
@@ -13,7 +17,7 @@ BEGIN
 	DECLARE _buysensor DOUBLE DEFAULT 1.003;
 	DECLARE _sellsensor DOUBLE DEFAULT 0.997 ;
 	
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 
 	SET @query = CONCAT('SELECT last FROM markets.',_market,'_quotes WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
 	PREPARE exec_query FROM @query;
@@ -81,3 +85,5 @@ BEGIN
 	
 	
 END 
+
+|

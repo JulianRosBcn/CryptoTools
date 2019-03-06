@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `DetectSignals`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.DetectSignals;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.DetectSignals(
 _market VARCHAR(20),
 _coinpair VARCHAR(20)
 )
@@ -9,7 +13,7 @@ BEGIN
 	DECLARE _order VARCHAR(10);
 	DECLARE _marketstate VARCHAR(10) DEFAULT "neutral"; -- BUY / SELL / NEUTRAL 
 	
-	SET time_zone='+01:00';
+	-- SET time_zone='+01:00';
 	
 	-- kraken gathering data
 	SET @query = CONCAT('SELECT sma5min_trending FROM analytics.',_market,'_alarms WHERE (coinpair = "',_coinpair, '") ORDER BY timestamp DESC LIMIT 1 INTO @query_output');
@@ -80,3 +84,4 @@ BEGIN
 	END IF;
 	
 END
+|

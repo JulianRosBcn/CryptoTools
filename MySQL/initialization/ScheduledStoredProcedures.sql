@@ -1,4 +1,9 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `UpdateIndicators`()
+
+delimiter |
+
+DROP PROCEDURE IF EXISTS analytics.UpdateIndicators;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.UpdateIndicators()
 BEGIN
 	CALL SMACalculation("kraken","btcusd");
 	CALL SMACalculation("kraken","btcltc");
@@ -16,8 +21,13 @@ BEGIN
 	CALL VolumeFlowCalculation("binance","btcltc");
 	CALL VolumeFlowCalculation("binance","btceth");
 END
+|
 
-CREATE DEFINER=`root`@`%` PROCEDURE `UpdateAlarms`()
+delimiter |
+
+DROP PROCEDURE IF EXISTS analytics.UpdateAlarms;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.UpdateAlarms()
 BEGIN
 	CALL SMATrending("kraken","btcusd");
 	CALL SMATrending("kraken","btcltc");
@@ -35,8 +45,13 @@ BEGIN
 	CALL VolumeFlowTrending("binance","btcltc");
 	CALL VolumeFlowTrending("binance","btceth");
 END
+|
 
-CREATE DEFINER=`root`@`%` PROCEDURE `UpdateSignals`()
+delimiter |
+
+DROP PROCEDURE IF EXISTS analytics.UpdateSignals;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.UpdateSignals()
 BEGIN
 	CALL DetectSignals("kraken","btcusd");
 	CALL DetectSignals("kraken","btcltc");
@@ -48,11 +63,17 @@ BEGIN
 	
 
 END
+|
 
-CREATE DEFINER=`root`@`%` PROCEDURE `UpdateOrders`()
+delimiter |
+
+DROP PROCEDURE IF EXISTS orderbook.UpdateOrders;
+
+CREATE DEFINER=`root`@`%` PROCEDURE orderbook.UpdateOrders()
 BEGIN
 	CALL OrderManager("btcusd");
 	CALL OrderManager("btcltc");
 	CALL OrderManager("btceth");
 END
 
+|

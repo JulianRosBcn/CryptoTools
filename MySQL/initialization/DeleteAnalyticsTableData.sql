@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `DeleteAnalyticsTableData`(
+delimiter | 
+
+DROP PROCEDURE IF EXISTS analytics.DeleteAnalyticsTableData;
+
+CREATE DEFINER=`root`@`%` PROCEDURE analytics.DeleteAnalyticsTableData(
 _market VARCHAR(20)
 )
 BEGIN
@@ -14,3 +18,5 @@ BEGIN
 		DELETE FROM binance_signals;
 	END IF;
 END
+
+|
