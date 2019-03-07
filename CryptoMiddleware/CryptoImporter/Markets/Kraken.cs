@@ -44,9 +44,9 @@ namespace CryptoImporter.Markets
                 krakenInfo.volume = Convert.ToDouble(tmp["result"]["XXBTZUSD"]["c"][1]);
 
                 Console.WriteLine(string.Format("KRAKEN BTCUSD: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now.ToUniversalTime()));
 
-                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now.ToUniversalTime());
 
                 // GETTING QUOTES BTCLTC
                 webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=LTCXBT");
@@ -61,9 +61,9 @@ namespace CryptoImporter.Markets
                 krakenInfo.volume = Convert.ToDouble(tmp["result"]["XLTCXXBT"]["c"][1]);
 
                 Console.WriteLine(string.Format("KRAKEN BTCLTC: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now.ToUniversalTime()));
 
-                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now.ToUniversalTime());
 
                 // GETTING QUOTES BTCETH
                 webresponse = client.DownloadString("https://api.kraken.com/0/public/Ticker?pair=ETHXBT");
@@ -78,9 +78,9 @@ namespace CryptoImporter.Markets
                 krakenInfo.volume = Convert.ToDouble(tmp["result"]["XETHXXBT"]["c"][1]);
 
                 Console.WriteLine(string.Format("KRAKEN BTCETH: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now));
+                        krakenInfo.ask.ToString(), krakenInfo.bid.ToString(), krakenInfo.last.ToString(), krakenInfo.volume.ToString(), DateTime.Now.ToUniversalTime()));
 
-                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(krakenInfo.market, krakenInfo.coinpair, krakenInfo.ask, krakenInfo.bid, krakenInfo.last, krakenInfo.volume, DateTime.Now.ToUniversalTime());
 
             }
 
