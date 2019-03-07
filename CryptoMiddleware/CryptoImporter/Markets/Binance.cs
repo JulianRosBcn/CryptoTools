@@ -46,9 +46,9 @@ namespace CryptoImporter.Markets
                 BinanceInfo.volume = Convert.ToDouble(tmp[11]["lastQty"]);
 
                 Console.WriteLine(string.Format("BINANCE BTCUSD: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now));
+                        BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now.ToUniversalTime()));
 
-                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now.ToUniversalTime());
 
                 // GETTING QUOTES BTCLTC
                 BinanceInfo.market = "binance";
@@ -59,9 +59,9 @@ namespace CryptoImporter.Markets
                 BinanceInfo.volume = Convert.ToDouble(tmp[1]["lastQty"]);
 
                 Console.WriteLine(string.Format("BINANCE BTCLTC: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
-                        BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now));
+                        BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now.ToUniversalTime()));
 
-                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now.ToUniversalTime());
                 
                 // GETTING QUOTES BTCETH
                 BinanceInfo.market = "binance";
@@ -74,7 +74,7 @@ namespace CryptoImporter.Markets
                 Console.WriteLine(string.Format("BINANCE BTCETH: Ask:{0} | Bid:{1} | Last:{2} | VolumeToday:{3} | Timestamp:{4}",
                         BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now));
 
-                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now);
+                MySQLData.MarketData.InsertQuoteData(BinanceInfo.market, BinanceInfo.coinpair, BinanceInfo.ask, BinanceInfo.bid, BinanceInfo.last, BinanceInfo.volume, DateTime.Now.ToUniversalTime());
 
             }
 
